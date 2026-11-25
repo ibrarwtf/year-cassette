@@ -7,38 +7,29 @@
 <style>
   :root { --ink:#e8e4da; --mute:#8d949b; --accent:#e2b04a; }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html, body { margin:0; background:#0e1012; color:var(--ink); font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-  #stage { position:relative; width:100%; height:min(60vh, 120vw); min-height:330px;
-           background:radial-gradient(120% 90% at 50% 20%, #2a3035, #0e1012); }
+  html, body { margin:0; background:#0e1012; color:var(--ink); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  #stage { position:relative; width:100%; height:min(62vh, 110vw); min-height:320px;
+           background:radial-gradient(120% 90% at 50% 25%, #2c3237, #0e1012); }
   #stage canvas { display:block; width:100%; height:100%; touch-action:none; }
   .hud { position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; gap:8px;
          font:600 13px ui-monospace,Menlo,Consolas,monospace; background:rgba(8,9,10,.78);
          border:1px solid #2c3136; border-radius:10px; padding:7px 11px; pointer-events:none; }
   #day { color:#9fe3a4; } #gear { color:var(--accent); }
   .tip { position:absolute; bottom:8px; width:100%; text-align:center; font-size:12px; color:var(--mute); pointer-events:none; }
-  main { max-width:480px; margin:0 auto; padding:12px 14px 40px; }
+  main { max-width:480px; margin:0 auto; padding:12px 16px 44px; }
   .controls { display:flex; gap:14px; align-items:center; }
-  #crank { width:140px; height:140px; flex:none; touch-action:none; }
+  #crank { width:132px; height:132px; flex:none; touch-action:none; }
   .btns { display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:1; }
   button { background:#23282d; color:var(--ink); border:1px solid #343a40; border-radius:10px; padding:10px 6px; font-size:14px; }
   button.on { background:var(--accent); color:#1a1a1a; border-color:var(--accent); font-weight:600; }
-  h1 { font-size:20px; margin:16px 0 4px; }
-  h2 { font-size:13px; color:var(--mute); text-transform:uppercase; letter-spacing:.08em; margin:18px 0 8px; font-weight:600; }
-  ol { margin:0; padding-left:20px; } li { margin:5px 0; }
-  li b { color:var(--accent); font-weight:600; }
-  p { margin:6px 0; }
-  .small { font-size:13px; color:var(--mute); }
-  .key { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:middle; }
-  .lead { font-size:16px; color:#cfcabf; margin:4px 0 8px; }
-  ul { margin:0; padding-left:20px; } ul li { margin:5px 0; }
-  .specs { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0 12px; }
-  .spec { background:#1a1d20; border:1px solid #2a2f34; border-radius:10px; padding:8px 10px; }
-  .spec b { display:block; font-size:16px; } .spec span { font-size:12px; color:var(--mute); }
-  .dl { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 10px; }
-  .btn { display:inline-block; text-decoration:none; background:var(--accent); color:#1a1a1a; font-weight:600; border-radius:10px; padding:10px 12px; font-size:14px; }
+  h1 { font-size:24px; margin:22px 0 6px; letter-spacing:.01em; }
+  .lead { font-size:17px; color:#d8d3c7; margin:0 0 14px; }
+  p { margin:8px 0; color:#c4c0b6; }
+  .facts { display:flex; flex-wrap:wrap; gap:6px; margin:16px 0; }
+  .facts span { font-size:12.5px; background:#1a1d20; border:1px solid #2a2f34; border-radius:999px; padding:5px 10px; color:#bfc5ca; }
+  .dl { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .btn { display:inline-block; text-decoration:none; background:var(--accent); color:#1a1a1a; font-weight:600; border-radius:10px; padding:11px 14px; font-size:14px; }
   .btn.ghost { background:#23282d; color:var(--ink); border:1px solid #343a40; font-weight:500; }
-  pre { white-space:pre-wrap; background:#0a0b0c; border:1px solid #2c3136; border-radius:10px; padding:10px 12px; font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; color:#cfe8d2; }
-  code { font:12.5px ui-monospace,Menlo,Consolas,monospace; color:#e2d4b0; }
 </style>
 <script type="importmap">
 { "imports": {
@@ -49,7 +40,7 @@
 </head>
 <body>
 <div id="stage">
-  <div class="hud"><span id="day">FRI 01 JAN</span><span id="gear">idler: free</span></div>
+  <div class="hud"><span id="day">2027</span><span id="gear">turn the crank</span></div>
   <div class="tip">Drag to orbit · pinch to zoom</div>
 </div>
 <main>
@@ -69,55 +60,23 @@
     <div class="btns">
       <button id="bRew">⏮ Rewind</button>
       <button id="bPlay">Play ⏭</button>
-      <button id="bXray" class="on">X-ray</button>
+      <button id="bXray">X-ray</button>
       <button id="bExplode">Exploded</button>
     </div>
   </div>
 
   <h1>Year Cassette</h1>
-  <p class="lead">A year of memories on one roll of receipt paper, in a box you crank by hand to replay it. Fully mechanical: no electronics, no screws, no glue.</p>
+  <p class="lead">A whole year, one photo a day, printed on a single roll of cheap receipt paper. Crank it to replay the year.</p>
+  <p>Thermal paper costs next to nothing, so a year of memories could be one long print. But as a wall collage it's three metres wide, and as framed months it's 12 frames a year. So instead, each year becomes one roll in one small box.</p>
+  <p>It's fully mechanical, with no electronics and no screws. One crank: clockwise plays, anticlockwise rewinds. A swing-idler gear picks which spool to drive, the way a cassette deck does.</p>
 
-  <h2>Why</h2>
-  <p>Thermal receipt paper costs almost nothing, and a cheap receipt printer prints on it without ink. That raised a question: what would you print if paper came by the metre?</p>
-  <p>A year, one small square per day. The first plan was a wall collage, with 52 week-columns, each 7 days tall. Laid out properly it's three metres wide. Next came one framed month at a time, but that's 12 frames a year and 60 after five years. Too much stuff.</p>
-  <p>What we really wanted was <b>one object per year</b>. So the year became one long strip, about 19.6&nbsp;m, the strip became a roll, and the roll went into a cassette. Turn the crank and the days scroll past the window. Turn it back to rewind.</p>
-
-  <h2>How it works</h2>
-  <ul>
-    <li><b>One crank in the middle</b> turns a small sun gear.</li>
-    <li>A <b>swing arm</b> carrying an idler gear follows the crank's direction. <b>Clockwise</b> it meshes with the left spool (play); <b>anticlockwise</b> it swings across to the right spool (rewind). It's the same trick cassette decks use.</li>
-    <li>The spool that isn't driven is pulled along by the paper against a light printed brake, so the paper stays taut both ways and can't jam.</li>
-    <li>The spools are never geared to each other: one roll grows while the other shrinks, so their speeds keep changing.</li>
-  </ul>
-
-  <h2>Build one</h2>
-  <div class="specs">
-    <div class="spec"><b>23 × 8.5 × 9 cm</b><span>box (crank adds 2 cm)</span></div>
-    <div class="spec"><b>13 prints</b><span>10 files, no supports</span></div>
-    <div class="spec"><b>≈ 250 g PLA</b><span>fits a Bambu A1 / P1S bed</span></div>
-    <div class="spec"><b>58 mm paper</b><span>48 mm square per day</span></div>
+  <div class="facts">
+    <span>23 × 8.5 × 9 cm</span><span>13 prints, no supports</span><span>~250 g PLA</span><span>Bambu A1 / P1S</span><span>58 mm thermal paper</span>
   </div>
   <div class="dl">
-    <a class="btn" href="cad/year-cassette-stl.zip" download>⬇ All STL files (.zip)</a>
-    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette/blob/main/cad/BUILD.md">Build guide</a>
-    <a class="btn ghost" href="cad/step/year_cassette_assembly.step" download>Assembly (.step)</a>
-    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette">Source on GitHub</a>
+    <a class="btn" href="cad/year-cassette-stl.zip" download>⬇ STL files</a>
+    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette">GitHub: CAD, build guide, CLAUDE.md</a>
   </div>
-  <p class="small"><b>Print:</b> PLA, 0.2&nbsp;mm layers, 3 walls, 15% infill, no supports. Use 4 walls and a brim for the sun gear shaft. Three plates: (1) tray, (2) deck + lid, (3) everything else. Print <code>spool_drive</code>, <code>spool</code> and <code>spool_cap</code> twice each.</p>
-  <p class="small"><b>Assemble:</b> spool drives and sun gear onto the floor pins, idler onto the swing arm, arm onto the sun shaft, then the deck, the paper roll, the spools and caps, the lid, and the crank. The build guide has the step-by-step version, how to make and load the paper roll, and a tuning table.</p>
-  <p class="small"><b>Status:</b> prototype v1. It's modelled and checked (no collisions, every gear pair meshes), but nobody has printed it yet, so expect to tune a fit or two.</p>
-
-  <h2>Hand it to Claude Code</h2>
-  <p class="small">Paste this into Claude Code. The repo includes a CLAUDE.md, the parametric CadQuery model and the build guide.</p>
-  <pre id="prompt">Clone https://github.com/ibrarwtf/year-cassette and read CLAUDE.md and cad/BUILD.md.
-I have a Bambu Lab printer. Help me print and assemble the Year Cassette:
-check every part fits my bed, tell me how to lay out the plates in Bambu Studio,
-then walk me through assembly. If a fit is off after printing, change the
-parameters in cad/year_cassette.py, regenerate the STLs and re-run its checks.</pre>
-  <button id="copy">Copy prompt</button>
-
-  <h2>Making the paper</h2>
-  <p class="small">Print one 48&nbsp;mm square per day on 58&nbsp;mm thermal paper, with each picture rotated 90°, because the paper runs sideways through the window. Join the strips with tape on the back. Wind the year onto the right spool, printed side out, with Dec&nbsp;31 at the core. Then lead Jan&nbsp;1 around the front of the guide posts into the left spool. Use long-life thermal paper if you want it to last for years.</p>
 </main>
 
 <script type="module">
@@ -125,192 +84,228 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const DEG = Math.PI / 180;
 
-// ---------------- roll content: Jan 1-3, "and so on", Dec 29-31 ----------------
-const CELL_MM = 52, SQ_MM = 48;
-const YEAR = 2027;
+// ======================= real dimensions (mm), straight from cad/year_cassette.py =======================
+// CAD z (up from the floor's underside) maps to three.js y = z - 42.5 so the box is centred.
+const Y = z => z - 42.5;
+const BW = 234, BD = 84, WALL = 2.4, FLOOR_T = 3, WALL_TOP = 82, LID_T = 3;
+const SPX = 80, SUN_Z = -20, POST_X = 64, POST_Z = 22, POST_D = 6;
+const M = 2, Z_SUN = 15, Z_IDL = 20, Z_SPL = 30, GEAR_T = 6;
+const GEAR_Z0 = 3.8, GEAR_Z1 = 9.8, ARM_Z0 = 10, DECK_Z0 = 14, DECK_T = 3, HEX_TOP = 27;
+const SPOOL_Z0 = 17.6, FLANGE_T = 1.6, CORE_Z1 = 77.8, CORE_D = 15, FLANGE_D = 48;
+const PAPER_W = 58, PAPER_MID = 48.5, WIN_W = 54, WIN_Z0 = 17.7, POST_TOP = 79.8;
+const SHAFT_D = 10, SHAFT_TOP = 97, CRANK_ARM = 40;
+const R_SUN = M * Z_SUN / 2, R_IDL = M * Z_IDL / 2, R_SPL = M * Z_SPL / 2, ARM = R_SUN + R_IDL;
+
+// ======================= the roll: 3 days, "and so on", 3 days =======================
+const CELL_MM = 52, SQ_MM = 48, YEAR = 2027;
 const DOW = ["SUN","MON","TUE","WED","THU","FRI","SAT"], MON = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-const d = (m, day) => new Date(YEAR, m, day);
-const CELLS = [ { t:"lead" }, { t:"day", d:d(0,1) }, { t:"day", d:d(0,2) }, { t:"day", d:d(0,3) }, { t:"gap" },
-                { t:"day", d:d(11,29) }, { t:"day", d:d(11,30) }, { t:"day", d:d(11,31) }, { t:"end" } ];
-const DAY_AT = [0, 0, 1, 2, 182, 362, 363, 364, 364];          // day-of-year for each cell (drives the roll sizes)
-const CS = 192, MONO = "ui-monospace,Menlo,Consolas,monospace", INK = "#26221f", PAPER = "#efeade";
-const cellCanvases = CELLS.map(c => {
-  const cv = document.createElement("canvas"); cv.width = CS; cv.height = CS; const g = cv.getContext("2d");
-  g.fillStyle = PAPER; g.fillRect(0, 0, CS, CS); g.fillStyle = INK; g.strokeStyle = INK; g.textAlign = "center";
+const day = (m, d) => new Date(YEAR, m, d);
+const CELLS = [ { t:"lead" }, { t:"day", d:day(0,1), s:0 }, { t:"day", d:day(0,2), s:1 }, { t:"day", d:day(0,3), s:2 }, { t:"gap" },
+                { t:"day", d:day(11,29), s:3 }, { t:"day", d:day(11,30), s:4 }, { t:"day", d:day(11,31), s:5 }, { t:"end" } ];
+const DAY_AT = [0, 0, 1, 2, 182, 362, 363, 364, 364];
+const INK = "#26221f", PAPER = "#efeade";
+
+// simple SVG scenes, drawn in "thermal" style: black ink, dotted greys
+const DOTS = `<defs>
+  <pattern id="d1" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".55" fill="${INK}"/></pattern>
+  <pattern id="d2" width="2.2" height="2.2" patternUnits="userSpaceOnUse"><circle cx="1.1" cy="1.1" r=".75" fill="${INK}"/></pattern>
+  <pattern id="d3" width="2" height="2" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".95" fill="${INK}"/></pattern>
+</defs>`;
+const SCENES = [
+  // mountains + sun
+  `<rect width="100" height="78" fill="url(#d1)"/><circle cx="72" cy="22" r="10" fill="${PAPER}"/>
+   <polygon points="0,78 0,52 22,26 38,46 55,20 78,50 92,36 100,44 100,78" fill="${INK}"/>
+   <polygon points="22,26 17,32 23,30 27,33" fill="${PAPER}"/><polygon points="55,20 49,28 56,25 61,29" fill="${PAPER}"/>
+   <polygon points="0,78 0,64 30,56 60,66 100,58 100,78" fill="url(#d3)"/>`,
+  // sea + sailboat
+  `<rect width="100" height="44" fill="${PAPER}"/><circle cx="30" cy="30" r="12" fill="url(#d2)"/>
+   <rect y="44" width="100" height="34" fill="url(#d2)"/>
+   <path d="M0 52 Q12 48 25 52 T50 52 T75 52 T100 52" stroke="${PAPER}" stroke-width="1.6" fill="none"/>
+   <path d="M0 62 Q12 58 25 62 T50 62 T75 62 T100 62" stroke="${PAPER}" stroke-width="1.6" fill="none"/>
+   <polygon points="62,44 62,14 80,42" fill="${INK}"/><polygon points="60,44 60,20 48,42" fill="url(#d3)"/>
+   <path d="M46 45 L84 45 L78 52 L52 52 Z" fill="${INK}"/>`,
+  // city at night
+  `<rect width="100" height="78" fill="url(#d3)"/><circle cx="80" cy="16" r="7" fill="${PAPER}"/><circle cx="83" cy="14" r="6" fill="url(#d3)"/>
+   <g fill="${INK}"><rect x="2" y="40" width="14" height="38"/><rect x="18" y="26" width="12" height="52"/><rect x="32" y="46" width="16" height="32"/>
+   <rect x="50" y="32" width="11" height="46"/><rect x="63" y="50" width="16" height="28"/><rect x="81" y="38" width="17" height="40"/></g>
+   <g fill="${PAPER}"><rect x="5" y="45" width="3" height="3"/><rect x="10" y="52" width="3" height="3"/><rect x="21" y="31" width="3" height="3"/>
+   <rect x="25" y="40" width="3" height="3"/><rect x="21" y="49" width="3" height="3"/><rect x="36" y="52" width="3" height="3"/>
+   <rect x="53" y="38" width="3" height="3"/><rect x="56" y="48" width="3" height="3"/><rect x="67" y="56" width="3" height="3"/>
+   <rect x="85" y="44" width="3" height="3"/><rect x="91" y="54" width="3" height="3"/><rect x="85" y="62" width="3" height="3"/></g>`,
+  // lone tree on a hill
+  `<rect width="100" height="78" fill="${PAPER}"/><circle cx="20" cy="18" r="8" fill="url(#d1)"/>
+   <path d="M0 78 L0 60 Q50 38 100 58 L100 78 Z" fill="url(#d2)"/>
+   <rect x="55" y="30" width="5" height="22" fill="${INK}"/>
+   <circle cx="57" cy="26" r="13" fill="${INK}"/><circle cx="48" cy="31" r="8" fill="${INK}"/><circle cx="67" cy="31" r="8" fill="${INK}"/>
+   <path d="M76 14 l4 2 l4 -2 M84 20 l3 1.5 l3 -1.5" stroke="${INK}" stroke-width="1.2" fill="none"/>`,
+  // road to the horizon
+  `<rect width="100" height="40" fill="${PAPER}"/><circle cx="50" cy="36" r="9" fill="url(#d1)"/>
+   <rect y="40" width="100" height="38" fill="url(#d1)"/>
+   <polygon points="47,40 53,40 82,78 18,78" fill="${INK}"/>
+   <g fill="${PAPER}"><polygon points="49.6,44 50.4,44 50.8,49 49.2,49"/><polygon points="49.2,54 50.8,54 51.5,62 48.5,62"/><polygon points="48.6,68 51.4,68 52.4,78 47.6,78"/></g>
+   <rect x="10" y="30" width="2" height="12" fill="${INK}"/><rect x="88" y="30" width="2" height="12" fill="${INK}"/>`,
+  // moon and stars
+  `<rect width="100" height="78" fill="${INK}"/><circle cx="58" cy="34" r="20" fill="${PAPER}"/>
+   <circle cx="52" cy="28" r="4" fill="url(#d2)"/><circle cx="64" cy="40" r="6" fill="url(#d2)"/><circle cx="62" cy="24" r="2.5" fill="url(#d2)"/>
+   <g fill="${PAPER}"><circle cx="12" cy="12" r="1"/><circle cx="24" cy="30" r=".8"/><circle cx="16" cy="56" r="1.1"/><circle cx="88" cy="10" r=".9"/>
+   <circle cx="90" cy="60" r="1"/><circle cx="34" cy="66" r=".8"/><circle cx="80" cy="70" r=".8"/><circle cx="30" cy="8" r=".7"/></g>`,
+];
+
+const CS = 256, MONO = "ui-monospace,Menlo,Consolas,monospace";
+const cellCanvases = CELLS.map(() => { const c = document.createElement("canvas"); c.width = CS; c.height = CS; return c; });
+let paperDirty = true;
+function paintCell(i, img) {
+  const c = CELLS[i], g = cellCanvases[i].getContext("2d");
+  g.fillStyle = PAPER; g.fillRect(0, 0, CS, CS); g.fillStyle = INK; g.textAlign = "center";
   if (c.t === "day") {
-    g.lineWidth = 4; g.strokeRect(6, 6, CS - 12, CS - 12);
-    g.font = `bold 30px ${MONO}`; g.fillText(MON[c.d.getMonth()], CS / 2, 52);
-    g.font = `bold 84px ${MONO}`; g.fillText(String(c.d.getDate()).padStart(2, "0"), CS / 2, 130);
-    g.font = `bold 24px ${MONO}`; g.fillText(DOW[c.d.getDay()], CS / 2, 168);
+    if (img) g.drawImage(img, 8, 8, CS - 16, (CS - 16) * 0.78);
+    g.font = `bold 30px ${MONO}`;
+    g.fillText(`${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]}`, CS / 2, CS - 18);
   } else if (c.t === "gap") {
-    g.lineWidth = 3; g.setLineDash([10, 8]); g.strokeRect(6, 6, CS - 12, CS - 12); g.setLineDash([]);
-    g.font = `bold 26px ${MONO}`; g.fillText("· · ·", CS / 2, 70); g.fillText("and so on", CS / 2, 108);
-    g.font = `20px ${MONO}`; g.fillText("359 more days", CS / 2, 142);
+    g.strokeStyle = INK; g.lineWidth = 4; g.setLineDash([12, 10]); g.strokeRect(10, 10, CS - 20, CS - 20); g.setLineDash([]);
+    g.font = `bold 34px ${MONO}`; g.fillText("· · ·", CS / 2, 96); g.fillText("and so on", CS / 2, 142);
+    g.font = `26px ${MONO}`; g.fillText("359 more days", CS / 2, 186);
   } else if (c.t === "lead") {
-    g.font = `bold 46px ${MONO}`; g.fillText(String(YEAR), CS / 2, 100); g.font = `bold 22px ${MONO}`; g.fillText("start →", CS / 2, 140);
+    g.font = `bold 62px ${MONO}`; g.fillText(String(YEAR), CS / 2, 130); g.font = `bold 28px ${MONO}`; g.fillText("start →", CS / 2, 182);
   } else {
-    g.font = `bold 46px ${MONO}`; g.fillText("END", CS / 2, 96); g.font = `bold 22px ${MONO}`; g.fillText("rewind ↺", CS / 2, 134);
+    g.font = `bold 62px ${MONO}`; g.fillText("END", CS / 2, 128); g.font = `bold 28px ${MONO}`; g.fillText("rewind ↺", CS / 2, 178);
   }
-  return cv;
+  paperDirty = true;
+}
+CELLS.forEach((c, i) => {
+  paintCell(i, null);
+  if (c.t !== "day") return;
+  const img = new Image();
+  img.onload = () => paintCell(i, img);
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 78" width="400" height="312">${DOTS}${SCENES[c.s]}</svg>`);
 });
 
-// ---------------- scene (units: mm, y up, spool axes vertical) ----------------
+// ======================= scene =======================
 const stage = document.getElementById("stage");
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 stage.prepend(renderer.domElement);
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(32, 1, 1, 6000);
-camera.position.set(120, 230, 330);
+const camera = new THREE.PerspectiveCamera(30, 1, 1, 6000);
+camera.position.set(70, 120, 330);
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, -6, 0); controls.enableDamping = true; controls.minDistance = 140;
-scene.add(new THREE.HemisphereLight(0xffffff, 0x334455, 1.15));
-const sun = new THREE.DirectionalLight(0xffffff, 1.5); sun.position.set(150, 320, 260); scene.add(sun);
-const back = new THREE.DirectionalLight(0xffffff, 0.45); back.position.set(-200, 120, -180); scene.add(back);
+controls.target.set(0, 4, 0); controls.enableDamping = true; controls.minDistance = 120;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3540, 1.15));
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(160, 300, 280); scene.add(key);
+const rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-220, 120, -200); scene.add(rim);
 
-const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.62, metalness: 0, ...o });
-const BODY = mat(0x2f3e46, { transparent: true, opacity: 0.22, depthWrite: false });
-const LID = mat(0x2f3e46, { transparent: true, opacity: 0.22, depthWrite: false });
+const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0, ...o });
+const BODY = mat(0x2f3e46, { transparent: true }), LID = mat(0x2f3e46, { transparent: true });
 const ORANGE = mat(0xe2b04a), BLUE = mat(0x7fb6c9), CREAM = mat(0xd8d2c4), DARK = mat(0x3a4a52);
-const box = (w, h, dd, m, x, y, z) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, dd), m); o.position.set(x, y, z); return o; };
+const box = (w, h, d, m, x, y, z) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); return o; };
 const cyl = (r, h, m, x, y, z, s = 36) => { const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, s), m); o.position.set(x, y, z); return o; };
-function gearGeo(teeth, module, thick, hole) {
-  const r = module * teeth / 2, ra = r + module, rf = r - 1.25 * module, step = 2 * Math.PI / teeth, sh = new THREE.Shape();
+function gearGeo(teeth, thick, hole) {
+  const r = M * teeth / 2, ra = r + M, rf = r - 1.25 * M, step = 2 * Math.PI / teeth, sh = new THREE.Shape();
   for (let i = 0; i < teeth; i++) {
     const a = i * step;
-    [[rf, a - step * 0.27], [ra, a - step * 0.11], [ra, a + step * 0.11], [rf, a + step * 0.27]].forEach(([rr, aa], k) => {
-      const x = rr * Math.cos(aa), y = rr * Math.sin(aa);
-      if (i === 0 && k === 0) sh.moveTo(x, y); else sh.lineTo(x, y);
+    [[rf, a - step * .27], [ra, a - step * .11], [ra, a + step * .11], [rf, a + step * .27]].forEach(([rr, aa], k) => {
+      const x = rr * Math.cos(aa), y = rr * Math.sin(aa); (i === 0 && k === 0) ? sh.moveTo(x, y) : sh.lineTo(x, y);
     });
   }
   sh.closePath();
   if (hole) { const h = new THREE.Path(); h.absarc(0, 0, hole, 0, Math.PI * 2, true); sh.holes.push(h); }
   const g = new THREE.ExtrudeGeometry(sh, { depth: thick, bevelEnabled: false, curveSegments: 6 });
-  g.rotateX(-Math.PI / 2); g.translate(0, -thick / 2, 0);
-  return g;
+  g.rotateX(-Math.PI / 2); g.translate(0, -thick / 2, 0); return g;
 }
 
-// dimensions
-const BW = 234, BD = 84, WALL = 3, FLOOR_Y = -46, GEAR_Y = -40, DECK_Y = -33, LID_Y = 46;
-const SPX = 80, POST_X = 64, POST_Z = 22, PAPER_Y = 2, PAPER_H = 58, PAPER_Z = POST_Z + 3.3;
-const M = 2, Z_SUN = 15, Z_IDL = 20, Z_SPL = 30, SUN_Z = -20;
-const R_SUN = M * Z_SUN / 2, R_IDL = M * Z_IDL / 2, R_SPL = M * Z_SPL / 2, ARM = R_SUN + R_IDL;
-// idler engages a spool gear when its centre is ARM from the sun axis and R_SPL + R_IDL from the spool axis
-const ENG = (() => {
-  const E = R_SPL + R_IDL, dx = SPX, dz = -SUN_Z, d = Math.hypot(dx, dz);
-  const a = (ARM * ARM - E * E + d * d) / (2 * d), h = Math.sqrt(ARM * ARM - a * a), ux = dx / d, uz = dz / d;
-  const p1 = [a * ux - h * uz, a * uz + h * ux], p2 = [a * ux + h * uz, a * uz - h * ux];
-  return p1[1] > p2[1] ? p1 : p2;                       // the solution in front of the sun (relative to it)
-})();
-const A_RIGHT = -Math.atan2(ENG[1], ENG[0]), A_LEFT = -Math.atan2(ENG[1], -ENG[0]);   // arm angles (rotation.y), swinging via the front
-
-// tray (floor + walls) and deck
+// tray: floor, back, sides, front wall with a one-day window that is open to the top (the lid closes it)
 const tray = new THREE.Group(); scene.add(tray);
-tray.add(box(BW, WALL, BD, BODY, 0, FLOOR_Y, 0));
-tray.add(box(BW, LID_Y - FLOOR_Y, WALL, BODY, 0, (LID_Y + FLOOR_Y) / 2, -BD / 2 + WALL / 2));
-tray.add(box(WALL, LID_Y - FLOOR_Y, BD, BODY, -BW / 2 + WALL / 2, (LID_Y + FLOOR_Y) / 2, 0));
-tray.add(box(WALL, LID_Y - FLOOR_Y, BD, BODY, BW / 2 - WALL / 2, (LID_Y + FLOOR_Y) / 2, 0));
-tray.add(box(BW, 12, WALL, BODY, 0, -40, BD / 2 - WALL / 2));                            // front skirt over the gear layer
-[[-SPX, 0], [0, SUN_Z], [SPX, 0]].forEach(([x, z]) => tray.add(cyl(2.4, 10, DARK, x, -41, z, 16)));   // axle pins
+const WH = WALL_TOP, FZ = BD / 2 - WALL / 2;
+tray.add(box(BW, FLOOR_T, BD, BODY, 0, Y(FLOOR_T / 2), 0));
+tray.add(box(BW, WH, WALL, BODY, 0, Y(WH / 2), -FZ));
+tray.add(box(WALL, WH, BD, BODY, -BW / 2 + WALL / 2, Y(WH / 2), 0));
+tray.add(box(WALL, WH, BD, BODY, BW / 2 - WALL / 2, Y(WH / 2), 0));
+const sideW = (BW - WIN_W) / 2;
+tray.add(box(sideW, WH, WALL, BODY, -(WIN_W + sideW) / 2, Y(WH / 2), FZ));
+tray.add(box(sideW, WH, WALL, BODY, (WIN_W + sideW) / 2, Y(WH / 2), FZ));
+tray.add(box(WIN_W, WIN_Z0, WALL, BODY, 0, Y(WIN_Z0 / 2), FZ));
+[[-SPX, 0], [SPX, 0], [0, SUN_Z]].forEach(([x, z]) => tray.add(cyl(5, 0.8, DARK, x, Y(FLOOR_T + 0.4), z, 20)));
 const deck = new THREE.Group(); scene.add(deck);
-deck.add(box(BW - 2 * WALL, WALL, BD - 2 * WALL, BODY, 0, DECK_Y, 0));
-[-1, 1].forEach(s => {
-  deck.add(cyl(3, PAPER_H + 6, DARK, s * POST_X, PAPER_Y, POST_Z, 20));                   // guide post
-  const tab = box(16, 2, 4, DARK, s * (SPX - 20), DECK_Y + 4, 16); tab.rotation.y = s * 0.6; deck.add(tab);   // brake tab
-});
-
-// lid with window
+deck.add(box(BW - 2 * WALL - 0.6, DECK_T, BD - 2 * WALL - 0.6, BODY, 0, Y(DECK_Z0 + DECK_T / 2), 0));
+[-1, 1].forEach(s => deck.add(cyl(POST_D / 2, POST_TOP - (DECK_Z0 + DECK_T), DARK, s * POST_X, Y((DECK_Z0 + DECK_T + POST_TOP) / 2), POST_Z, 20)));
 const lid = new THREE.Group(); scene.add(lid);
-const WX = 62, WY = 32, LID_FRONT_Z = BD / 2 - WALL / 2, FY0 = DECK_Y, FH = LID_Y - DECK_Y;
-lid.add(box(BW, WALL, BD, LID, 0, LID_Y, 0));
-lid.add(box(BW, LID_Y - (PAPER_Y + WY), WALL, LID, 0, (LID_Y + PAPER_Y + WY) / 2, LID_FRONT_Z));
-lid.add(box(BW, (PAPER_Y - WY) - FY0, WALL, LID, 0, (PAPER_Y - WY + FY0) / 2, LID_FRONT_Z));
-lid.add(box(BW / 2 - WX, 2 * WY, WALL, LID, -(BW / 2 + WX) / 2, PAPER_Y, LID_FRONT_Z));
-lid.add(box(BW / 2 - WX, 2 * WY, WALL, LID, (BW / 2 + WX) / 2, PAPER_Y, LID_FRONT_Z));
+lid.add(box(BW, LID_T, BD, LID, 0, Y(WALL_TOP + LID_T / 2), 0));
 
-// spools (with their gears)
+// spools: drive gear + hex shaft, removable spool with flanges, and the paper roll on it
 const stripe = document.createElement("canvas"); stripe.width = 256; stripe.height = 8;
 { const g = stripe.getContext("2d"); g.fillStyle = PAPER; g.fillRect(0, 0, 256, 8); g.fillStyle = "rgba(60,50,40,.2)"; for (let x = 0; x < 256; x += 32) g.fillRect(x, 0, 3, 8); }
 const stripeTex = new THREE.CanvasTexture(stripe); stripeTex.colorSpace = THREE.SRGBColorSpace; stripeTex.wrapS = THREE.RepeatWrapping;
 function makeSpool(x) {
   const g = new THREE.Group(); g.position.x = x; scene.add(g);
-  g.add(cyl(7.5, PAPER_H + 4, ORANGE, 0, PAPER_Y, 0));
-  g.add(cyl(24, 2, ORANGE, 0, PAPER_Y + PAPER_H / 2 + 2, 0)); g.add(cyl(24, 2, ORANGE, 0, PAPER_Y - PAPER_H / 2 - 2, 0));
-  g.add(cyl(3, DECK_Y - GEAR_Y + 4, ORANGE, 0, (DECK_Y + GEAR_Y) / 2, 0, 16));              // shaft through the deck
-  const gear = new THREE.Mesh(gearGeo(Z_SPL, M, 5, 3), ORANGE); gear.position.y = GEAR_Y; g.add(gear);
-  const roll = new THREE.Group(); g.add(roll);
-  const side = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, PAPER_H, 48, 1, true), new THREE.MeshStandardMaterial({ map: stripeTex, roughness: 0.9 }));
-  const cap = new THREE.Mesh(new THREE.RingGeometry(0.36, 1, 48), new THREE.MeshStandardMaterial({ color: 0xe9e2d2, roughness: 0.9, side: THREE.DoubleSide }));
-  cap.rotation.x = -Math.PI / 2; cap.position.y = PAPER_H / 2 + 0.05; roll.add(side, cap); roll.position.y = PAPER_Y;
+  const gear = new THREE.Mesh(gearGeo(Z_SPL, GEAR_T, 3.2), ORANGE); gear.position.y = Y(GEAR_Z0 + GEAR_T / 2); g.add(gear);
+  g.add(cyl(6.35, HEX_TOP - GEAR_Z1, ORANGE, 0, Y((GEAR_Z1 + HEX_TOP) / 2), 0, 6));
+  g.add(cyl(FLANGE_D / 2, FLANGE_T, ORANGE, 0, Y(SPOOL_Z0 + FLANGE_T / 2), 0));
+  g.add(cyl(CORE_D / 2, CORE_Z1 - SPOOL_Z0, ORANGE, 0, Y((SPOOL_Z0 + CORE_Z1) / 2), 0));
+  g.add(cyl(FLANGE_D / 2, FLANGE_T, ORANGE, 0, Y(CORE_Z1 + FLANGE_T / 2), 0));
+  const roll = new THREE.Group(); roll.position.y = Y(PAPER_MID); g.add(roll);
+  const side = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, PAPER_W, 48, 1, true), new THREE.MeshStandardMaterial({ map: stripeTex, roughness: .9 }));
+  const cap = new THREE.Mesh(new THREE.RingGeometry(.36, 1, 48), new THREE.MeshStandardMaterial({ color: 0xe9e2d2, roughness: .9, side: THREE.DoubleSide }));
+  cap.rotation.x = -Math.PI / 2; cap.position.y = PAPER_W / 2 + .05; roll.add(side, cap);
   return { g, roll };
 }
 const spoolL = makeSpool(-SPX), spoolR = makeSpool(SPX);
 
-// sun gear + shaft + crank (one rigid part in motion)
+// sun gear + shaft + crank
 const sunGroup = new THREE.Group(); sunGroup.position.z = SUN_Z; scene.add(sunGroup);
-sunGroup.add(new THREE.Mesh(gearGeo(Z_SUN, M, 5, 0), ORANGE)); sunGroup.children[0].position.y = GEAR_Y;
-sunGroup.add(cyl(3, LID_Y - GEAR_Y + 10, ORANGE, 0, (LID_Y + GEAR_Y) / 2 + 5, 0, 16));
-const crank = new THREE.Group(); crank.position.y = LID_Y + 8; sunGroup.add(crank);
-crank.add(cyl(7, 6, CREAM, 0, 0, 0)); crank.add(box(36, 5, 8, CREAM, 16, 0, 0)); crank.add(cyl(4.5, 18, ORANGE, 32, 11, 0, 20));
+const sunGear = new THREE.Mesh(gearGeo(Z_SUN, GEAR_T, 0), ORANGE); sunGear.position.y = Y(GEAR_Z0 + GEAR_T / 2); sunGroup.add(sunGear);
+sunGroup.add(cyl(SHAFT_D / 2, SHAFT_TOP - GEAR_Z1, ORANGE, 0, Y((GEAR_Z1 + SHAFT_TOP) / 2), 0, 24));
+const crank = new THREE.Group(); crank.position.y = Y(WALL_TOP + LID_T + 0.5); sunGroup.add(crank);
+crank.add(cyl(9, 10, CREAM, 0, 5, 0)); crank.add(box(CRANK_ARM, 5, 9, CREAM, CRANK_ARM / 2, 2.5, 0)); crank.add(cyl(4.5, 22, ORANGE, CRANK_ARM, 11, 0, 20));
 
 // swing arm + idler
-const armGroup = new THREE.Group(); armGroup.position.set(0, GEAR_Y + 4, SUN_Z); scene.add(armGroup);
-armGroup.add(box(ARM + 8, 2, 7, BLUE, ARM / 2, 0, 0));
-armGroup.add(cyl(5, 3, BLUE, 0, 0, 0, 20));
-const idler = new THREE.Mesh(gearGeo(Z_IDL, M, 5, 2), BLUE); idler.position.set(ARM, -4, 0); armGroup.add(idler);
+const armGroup = new THREE.Group(); armGroup.position.set(0, Y(ARM_Z0 + 1), SUN_Z); scene.add(armGroup);
+armGroup.add(box(ARM + 8, 2, 7, BLUE, ARM / 2, 0, 0)); armGroup.add(cyl(8, 2, BLUE, 0, 0, 0, 24));
+const idler = new THREE.Mesh(gearGeo(Z_IDL, GEAR_T, 2.5), BLUE); idler.position.set(ARM, Y(GEAR_Z0 + GEAR_T / 2) - Y(ARM_Z0 + 1), 0); armGroup.add(idler);
+const ENG = (() => {
+  const E = R_SPL + R_IDL, dx = SPX, dz = -SUN_Z, d = Math.hypot(dx, dz);
+  const a = (ARM * ARM - E * E + d * d) / (2 * d), h = Math.sqrt(ARM * ARM - a * a), ux = dx / d, uz = dz / d;
+  const p1 = [a * ux - h * uz, a * uz + h * ux], p2 = [a * ux + h * uz, a * uz - h * ux];
+  return p1[1] > p2[1] ? p1 : p2;
+})();
+const A_RIGHT = -Math.atan2(ENG[1], ENG[0]), A_LEFT = -Math.atan2(ENG[1], -ENG[0]);
 
-// paper span (canvas texture) + legs to the rolls
-const PW = 2 * POST_X, PXMM = 4;
-const paperCanvas = document.createElement("canvas"); paperCanvas.width = PW * PXMM; paperCanvas.height = PAPER_H * PXMM;
+// paper span between the guide posts (texture) + the short legs to each roll
+const PW = 2 * POST_X, PXMM = 5, PAPER_Z = POST_Z + POST_D / 2 + 0.3;
+const paperCanvas = document.createElement("canvas"); paperCanvas.width = PW * PXMM; paperCanvas.height = PAPER_W * PXMM;
 const pctx = paperCanvas.getContext("2d");
 const paperTex = new THREE.CanvasTexture(paperCanvas); paperTex.colorSpace = THREE.SRGBColorSpace; paperTex.anisotropy = 8;
-const span = new THREE.Mesh(new THREE.PlaneGeometry(PW, PAPER_H), new THREE.MeshStandardMaterial({ map: paperTex, roughness: 0.85 }));
-span.position.set(0, PAPER_Y, PAPER_Z); scene.add(span);
-const legMat = new THREE.MeshStandardMaterial({ color: 0xe6dfd0, roughness: 0.9, side: THREE.DoubleSide });
-const legL = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_H), legMat), legR = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_H), legMat);
-legL.position.y = legR.position.y = PAPER_Y; scene.add(legL, legR);
+const span = new THREE.Mesh(new THREE.PlaneGeometry(PW, PAPER_W), new THREE.MeshStandardMaterial({ map: paperTex, roughness: .85 }));
+span.position.set(0, Y(PAPER_MID), PAPER_Z); scene.add(span);
+const legMat = new THREE.MeshStandardMaterial({ color: 0xe6dfd0, roughness: .9, side: THREE.DoubleSide });
+const legL = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_W), legMat), legR = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_W), legMat);
+legL.position.y = legR.position.y = Y(PAPER_MID); scene.add(legL, legR);
 function placeLeg(leg, s, r) {
   const ax = s * SPX, az = r, bx = s * POST_X, bz = PAPER_Z, dx = bx - ax, dz = bz - az;
-  leg.scale.x = Math.max(Math.hypot(dx, dz), 0.1); leg.position.x = (ax + bx) / 2; leg.position.z = (az + bz) / 2; leg.rotation.y = -Math.atan2(dz, dx);
+  leg.scale.x = Math.max(Math.hypot(dx, dz), .1); leg.position.x = (ax + bx) / 2; leg.position.z = (az + bz) / 2; leg.rotation.y = -Math.atan2(dz, dx);
 }
 
-// ---------------- mechanism state ----------------
-const PAPER_T = 0.06, CORE_D = 15, LEAD = 70, TOTAL = LEAD * 2 + 365 * CELL_MM;
+// ======================= mechanism =======================
+const PAPER_T = .06, LEAD = 70, TOTAL = LEAD * 2 + 365 * CELL_MM;
 const rollR = L => Math.sqrt(CORE_D * CORE_D + 4 * Math.max(L, 0) * PAPER_T / Math.PI) / 2;
-const MIN_POS = 1 * CELL_MM, MAX_POS = 7 * CELL_MM;
+const MIN_POS = 1 * CELL_MM, MAX_POS = 7 * CELL_MM, RATIO = Z_SUN / Z_SPL;
 let pos = MIN_POS, crankAng = 0, arm = (A_LEFT + A_RIGHT) / 2, angL = 0, angR = 0, idlerSpin = 0;
-function dayProgress(p) {        // display position -> day of year (piecewise through the "and so on" cell)
-  const c = p / CELL_MM, i = Math.max(0, Math.min(CELLS.length - 2, Math.floor(c))), f = c - i;
-  return DAY_AT[i] + (DAY_AT[i + 1] - DAY_AT[i]) * f;
-}
+function dayProgress(p) { const c = p / CELL_MM, i = Math.max(0, Math.min(CELLS.length - 2, Math.floor(c))), f = c - i; return DAY_AT[i] + (DAY_AT[i + 1] - DAY_AT[i]) * f; }
 const played = () => LEAD + dayProgress(pos) * CELL_MM;
-const RATIO = Z_SUN / Z_SPL;
-
-function crankBy(dth) {          // dth > 0: clockwise seen from above = play
+function crankBy(dth) {          // dth > 0: clockwise from above = play
   let rem = dth;
   if (rem > 0 && arm > A_LEFT) { const sw = Math.min(rem, arm - A_LEFT); arm -= sw; rem -= sw; crankAng += sw; }
   if (rem < 0 && arm < A_RIGHT) { const sw = Math.max(rem, arm - A_RIGHT); arm -= sw; rem -= sw; crankAng += sw; }
   if (Math.abs(rem) < 1e-9) return;
   const rL = rollR(played()), rR = rollR(TOTAL - played());
-  if (rem > 0) {                 // idler on the left spool: left winds, right is pulled
-    const dL = Math.min(RATIO * rem * rL, MAX_POS - pos), used = dL / (RATIO * rL);
-    pos += dL; angL -= dL / rL; angR -= dL / rR; idlerSpin += used * Z_SUN / Z_IDL; crankAng += used;
-  } else {                       // idler on the right spool: right winds back, left is pulled
-    const dL = Math.max(RATIO * rem * rR, MIN_POS - pos), used = dL / (RATIO * rR);
-    pos += dL; angR -= dL / rR; angL -= dL / rL; idlerSpin += used * Z_SUN / Z_IDL; crankAng += used;
-  }
+  if (rem > 0) { const dL = Math.min(RATIO * rem * rL, MAX_POS - pos), u = dL / (RATIO * rL); pos += dL; angL -= dL / rL; angR -= dL / rR; idlerSpin += u * Z_SUN / Z_IDL; crankAng += u; }
+  else { const dL = Math.max(RATIO * rem * rR, MIN_POS - pos), u = dL / (RATIO * rR); pos += dL; angR -= dL / rR; angL -= dL / rL; idlerSpin += u * Z_SUN / Z_IDL; crankAng += u; }
+  paperDirty = true;
 }
-
-let lastDrawn = null;
 function drawPaper() {
   const s = PXMM, W = paperCanvas.width, H = paperCanvas.height, sq = SQ_MM * s, y = (H - sq) / 2;
   pctx.fillStyle = PAPER; pctx.fillRect(0, 0, W, H);
-  CELLS.forEach((c, i) => {
-    const cx = (i * CELL_MM - pos + PW / 2) * s;
-    if (cx + sq / 2 < 0 || cx - sq / 2 > W) return;
-    pctx.drawImage(cellCanvases[i], cx - sq / 2, y, sq, sq);
-  });
-  paperTex.needsUpdate = true;
+  CELLS.forEach((c, i) => { const cx = (i * CELL_MM - pos + PW / 2) * s; if (cx + sq / 2 > 0 && cx - sq / 2 < W) pctx.drawImage(cellCanvases[i], cx - sq / 2, y, sq, sq); });
+  paperTex.needsUpdate = true; paperDirty = false;
 }
 
 const hudDay = document.getElementById("day"), hudGear = document.getElementById("gear"), dialArm = document.getElementById("arm");
@@ -318,62 +313,49 @@ function update() {
   const rL = rollR(played()), rR = rollR(TOTAL - played());
   spoolL.roll.scale.set(rL, 1, rL); spoolR.roll.scale.set(rR, 1, rR);
   spoolL.g.rotation.y = angL; spoolR.g.rotation.y = angR;
-  sunGroup.rotation.y = -crankAng;
-  armGroup.rotation.y = arm; idler.rotation.y = idlerSpin - arm;
+  sunGroup.rotation.y = -crankAng; armGroup.rotation.y = arm; idler.rotation.y = idlerSpin - arm;
   placeLeg(legL, -1, rL); placeLeg(legR, 1, rR);
-  if (lastDrawn !== pos) { drawPaper(); lastDrawn = pos; }
+  if (paperDirty) drawPaper();
   const c = CELLS[Math.round(pos / CELL_MM)];
-  hudDay.textContent = c.t === "day" ? `${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]}` : c.t === "gap" ? "· · · and so on" : c.t.toUpperCase();
-  hudGear.textContent = Math.abs(arm - A_LEFT) < 1e-6 ? "▶ play gear engaged" : Math.abs(arm - A_RIGHT) < 1e-6 ? "◀ rewind gear engaged" : "idler swinging…";
+  hudDay.textContent = c.t === "day" ? `${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]} ${YEAR}` : c.t === "gap" ? "· · · and so on" : c.t.toUpperCase();
+  hudGear.textContent = Math.abs(arm - A_LEFT) < 1e-6 ? "▶ playing" : Math.abs(arm - A_RIGHT) < 1e-6 ? "◀ rewinding" : (crankAng === 0 ? "turn the crank ↻" : "idler swinging…");
   dialArm.setAttribute("transform", `rotate(${crankAng / DEG} 75 75)`);
 }
 
-// ---------------- views ----------------
-let xray = true, exploded = false, exAmt = 0;
+// ======================= views & input =======================
+let xray = false, exploded = location.hash === "#explode", exAmt = 0, auto = location.hash === "#play" ? 1 : 0;
+if (exploded) document.getElementById("bExplode").classList.add("on");
 function applyViews() {
-  const op = xray ? 0.22 : 1;
-  [BODY, LID].forEach(m => { m.opacity = op; m.transparent = op < 1; m.depthWrite = op >= 1; });
+  const op = xray ? 0.2 : 1;
+  [BODY, LID].forEach(m => { m.opacity = op; m.depthWrite = op >= 1; });
   lid.position.y = exAmt * 90; deck.position.y = exAmt * 22;
   spoolL.g.position.y = spoolR.g.position.y = exAmt * 45;
-  crank.position.y = LID_Y + 8 + exAmt * 110;
-  armGroup.position.y = GEAR_Y + 4 + exAmt * 10;
-  span.visible = legL.visible = legR.visible = exAmt < 0.05;
+  crank.position.y = Y(WALL_TOP + LID_T + .5) + exAmt * 110; armGroup.position.y = Y(ARM_Z0 + 1) + exAmt * 10;
+  span.visible = legL.visible = legR.visible = exAmt < .05;
 }
-
-// ---------------- input ----------------
-const dial = document.getElementById("crank"); let lastA = null, auto = 0;
+const dial = document.getElementById("crank"); let lastA = null;
 const angOf = e => { const r = dial.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)); };
 dial.addEventListener("pointerdown", e => { dial.setPointerCapture(e.pointerId); lastA = angOf(e); auto = 0; });
-dial.addEventListener("pointermove", e => {
-  if (lastA === null) return; const a = angOf(e); let dd = a - lastA;
-  if (dd > Math.PI) dd -= 2 * Math.PI; if (dd < -Math.PI) dd += 2 * Math.PI; lastA = a; crankBy(dd);
-});
+dial.addEventListener("pointermove", e => { if (lastA === null) return; const a = angOf(e); let d = a - lastA; if (d > Math.PI) d -= 2 * Math.PI; if (d < -Math.PI) d += 2 * Math.PI; lastA = a; crankBy(d); });
 const up = () => lastA = null; dial.addEventListener("pointerup", up); dial.addEventListener("pointercancel", up);
 document.getElementById("bRew").onclick = () => auto = -1;
 document.getElementById("bPlay").onclick = () => auto = 1;
 document.getElementById("bXray").onclick = e => { xray = !xray; e.target.classList.toggle("on", xray); };
-document.getElementById("copy").onclick = e => { navigator.clipboard.writeText(document.getElementById("prompt").textContent).then(() => { e.target.textContent = "Copied ✓"; setTimeout(() => e.target.textContent = "Copy prompt", 1500); }); };
 document.getElementById("bExplode").onclick = e => { exploded = !exploded; e.target.classList.toggle("on", exploded); };
 
 function resize() {
   const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false);
   camera.aspect = w / h; camera.updateProjectionMatrix();
   const vf = THREE.MathUtils.degToRad(camera.fov) / 2, hf = Math.atan(Math.tan(vf) * camera.aspect);
-  const dist = Math.max(160 / Math.tan(hf), 125 / Math.tan(vf));
+  const dist = Math.max(142 / Math.tan(hf), 88 / Math.tan(vf));       // frame the whole 234 mm box
   const dir = camera.position.clone().sub(controls.target).normalize();
-  camera.position.copy(controls.target).addScaledVector(dir, dist); controls.maxDistance = dist * 2;
+  camera.position.copy(controls.target).addScaledVector(dir, dist); controls.maxDistance = dist * 2.2;
 }
 window.addEventListener("resize", resize); resize();
-if (location.hash === "#play") auto = 1;           // demo link: starts playing on open
-if (location.hash === "#explode") { exploded = true; document.getElementById("bExplode").classList.add("on"); }
 
 function loop() {
-  if (auto) {
-    const before = pos; crankBy(auto * 0.12);
-    const swinging = Math.abs(arm - (auto > 0 ? A_LEFT : A_RIGHT)) > 1e-6;
-    if (!swinging && pos === before) auto = 0;          // reached the start or the end
-  }
-  exAmt += ((exploded ? 1 : 0) - exAmt) * 0.12;
+  if (auto) { const b = pos; crankBy(auto * .1); const sw = Math.abs(arm - (auto > 0 ? A_LEFT : A_RIGHT)) > 1e-6; if (!sw && pos === b) auto = 0; }
+  exAmt += ((exploded ? 1 : 0) - exAmt) * .12;
   applyViews(); update(); controls.update(); renderer.render(scene, camera); requestAnimationFrame(loop);
 }
 loop();

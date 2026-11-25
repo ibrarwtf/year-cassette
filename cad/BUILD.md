@@ -9,7 +9,7 @@ A hand-cranked box that replays one year of thermal-printer paper. One 48 mm squ
 - A printer with a bed of at least 245 × 90 mm. The tray is 234 mm long. Bambu Lab A1, P1S, X1C and H2D all work; the A1 mini does not.
 - About 250 g of PLA.
 - The paper: a roll of 58 mm thermal paper printed with one square per day (see "Making the paper roll" below).
-- Optional: a 124 × 64 mm piece of thin clear plastic for the window, held with a bit of tape.
+- Optional: a 54 × 64 mm piece of thin clear plastic for the window, held with a bit of tape.
 
 ## Printed parts
 

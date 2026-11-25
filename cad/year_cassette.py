@@ -78,7 +78,7 @@ brake_bump_h = 1.2
 brake_tongue_t = 1.2
 
 # Window (open at the top: the lid closes it, so no long bridge to print)
-win_w = 124.0
+win_w = 54.0            # shows one 48 mm day at a time
 
 # Crank
 crank_arm = 40.0

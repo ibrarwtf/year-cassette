@@ -3,33 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#ecebe7">
 <title>Year Cassette: a year of memories on one hand-cranked roll</title>
 <style>
-  :root { --ink:#e8e4da; --mute:#8d949b; --accent:#e2b04a; }
+  :root { --bg:#ecebe7; --ink:#1c1c1a; --mute:#7c7a73; --line:#d8d5ce; --accent:#ff5b1a; }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html, body { margin:0; background:#0e1012; color:var(--ink); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-  #stage { position:relative; width:100%; height:min(62vh, 110vw); min-height:320px;
-           background:radial-gradient(120% 90% at 50% 25%, #2c3237, #0e1012); }
+  html, body { margin:0; background:var(--bg); color:var(--ink);
+               font:15px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,sans-serif; -webkit-font-smoothing:antialiased; }
+  .mono { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.06em; text-transform:uppercase; }
+  #stage { position:relative; width:100%; height:min(62vh, 108vw); min-height:320px;
+           background:radial-gradient(110% 80% at 50% 30%, #f7f6f3 0%, #ecebe7 62%, #e3e1db 100%); }
   #stage canvas { display:block; width:100%; height:100%; touch-action:none; }
-  .hud { position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; gap:8px;
-         font:600 13px ui-monospace,Menlo,Consolas,monospace; background:rgba(8,9,10,.78);
-         border:1px solid #2c3136; border-radius:10px; padding:7px 11px; pointer-events:none; }
-  #day { color:#9fe3a4; } #gear { color:var(--accent); }
-  .tip { position:absolute; bottom:8px; width:100%; text-align:center; font-size:12px; color:var(--mute); pointer-events:none; }
-  main { max-width:480px; margin:0 auto; padding:12px 16px 44px; }
-  .controls { display:flex; gap:14px; align-items:center; }
-  #crank { width:132px; height:132px; flex:none; touch-action:none; }
+  .hud { position:absolute; top:14px; left:16px; right:16px; display:flex; justify-content:space-between; font-size:11px; color:var(--ink); pointer-events:none; }
+  .hud .dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-right:7px; vertical-align:1px; }
+  .tip { position:absolute; bottom:12px; width:100%; text-align:center; font-size:10.5px; color:var(--mute); pointer-events:none; }
+  main { max-width:460px; margin:0 auto; padding:14px 20px 56px; }
+  .controls { display:flex; gap:16px; align-items:center; }
+  #crank { width:124px; height:124px; flex:none; touch-action:none; filter:drop-shadow(0 6px 10px rgba(0,0,0,.08)); }
   .btns { display:grid; grid-template-columns:1fr 1fr; gap:8px; flex:1; }
-  button { background:#23282d; color:var(--ink); border:1px solid #343a40; border-radius:10px; padding:10px 6px; font-size:14px; }
-  button.on { background:var(--accent); color:#1a1a1a; border-color:var(--accent); font-weight:600; }
-  h1 { font-size:24px; margin:22px 0 6px; letter-spacing:.01em; }
-  .lead { font-size:17px; color:#d8d3c7; margin:0 0 14px; }
-  p { margin:8px 0; color:#c4c0b6; }
-  .facts { display:flex; flex-wrap:wrap; gap:6px; margin:16px 0; }
-  .facts span { font-size:12.5px; background:#1a1d20; border:1px solid #2a2f34; border-radius:999px; padding:5px 10px; color:#bfc5ca; }
-  .dl { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
-  .btn { display:inline-block; text-decoration:none; background:var(--accent); color:#1a1a1a; font-weight:600; border-radius:10px; padding:11px 14px; font-size:14px; }
-  .btn.ghost { background:#23282d; color:var(--ink); border:1px solid #343a40; font-weight:500; }
+  button { font:inherit; font-size:13px; background:#f7f6f3; color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:10px 6px; }
+  button:active { transform:translateY(1px); }
+  button.on { background:var(--ink); color:#f7f6f3; border-color:var(--ink); }
+  .eyebrow { font-size:11px; color:var(--mute); margin:34px 0 8px; }
+  .eyebrow .dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--accent); margin-right:8px; vertical-align:1px; }
+  h1 { font-size:38px; line-height:1.05; letter-spacing:-.025em; font-weight:650; margin:0 0 14px; }
+  .lead { font-size:18px; line-height:1.45; color:#3a3936; margin:0 0 18px; letter-spacing:-.005em; }
+  p { margin:10px 0; color:#55534e; }
+  .facts { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); margin:26px 0 22px; }
+  .facts div { padding:11px 0; border-bottom:1px solid var(--line); font-size:13.5px; }
+  .facts div:nth-child(odd) { padding-right:12px; }
+  .facts span { display:block; font-size:10.5px; color:var(--mute); margin-bottom:2px; }
+  .dl { display:flex; flex-wrap:wrap; gap:10px; }
+  .btn { display:inline-block; text-decoration:none; background:var(--ink); color:#f7f6f3; border-radius:999px; padding:12px 18px; font-size:14px; font-weight:500; }
+  .btn.ghost { background:transparent; color:var(--ink); border:1px solid #c9c6be; }
+  footer { margin-top:40px; font-size:10.5px; color:var(--mute); }
 </style>
 <script type="importmap">
 { "imports": {
@@ -40,48 +47,57 @@
 </head>
 <body>
 <div id="stage">
-  <div class="hud"><span id="day">2027</span><span id="gear">turn the crank</span></div>
-  <div class="tip">Drag to orbit · pinch to zoom</div>
+  <div class="hud mono"><span id="day">2027</span><span><span class="dot"></span><span id="gear">Turn the crank</span></span></div>
+  <div class="tip mono">Drag to orbit · pinch to zoom</div>
 </div>
 <main>
   <div class="controls">
     <svg id="crank" viewBox="0 0 150 150" aria-label="crank">
-      <circle cx="75" cy="75" r="71" fill="#16191c" stroke="#30363c" stroke-width="2"/>
-      <path d="M 75 14 A 61 61 0 0 1 132 58" fill="none" stroke="#3d6b45" stroke-width="5" stroke-linecap="round"/>
-      <path d="M 18 58 A 61 61 0 0 1 75 14" fill="none" stroke="#6b5a3d" stroke-width="5" stroke-linecap="round"/>
-      <g id="arm">
-        <rect x="69" y="22" width="12" height="56" rx="6" fill="#4a5259"/>
-        <circle cx="75" cy="28" r="15" fill="#e2b04a" stroke="#a57c2a" stroke-width="2"/>
+      <circle cx="75" cy="75" r="72" fill="#f7f6f3" stroke="#d8d5ce" stroke-width="1.5"/>
+      <circle cx="75" cy="75" r="60" fill="none" stroke="#e6e3dc" stroke-width="1"/>
+      <g fill="#c9c6be">
+        <circle cx="75" cy="9" r="1.6"/><circle cx="141" cy="75" r="1.6"/><circle cx="75" cy="141" r="1.6"/><circle cx="9" cy="75" r="1.6"/>
       </g>
-      <circle cx="75" cy="75" r="13" fill="#2b3136" stroke="#555d64" stroke-width="2"/>
-      <text x="75" y="104" text-anchor="middle" font-size="9" fill="#6c757d" letter-spacing="1">↻ PLAY</text>
-      <text x="75" y="117" text-anchor="middle" font-size="9" fill="#6c757d" letter-spacing="1">↺ REWIND</text>
+      <g id="arm">
+        <rect x="70" y="26" width="10" height="50" rx="5" fill="#2b2b29"/>
+        <circle cx="75" cy="30" r="14" fill="#ff5b1a"/>
+        <circle cx="75" cy="30" r="5" fill="#ffffff" opacity=".35"/>
+      </g>
+      <circle cx="75" cy="75" r="11" fill="#2b2b29"/>
+      <text x="75" y="110" text-anchor="middle" font-size="7.5" fill="#9a978f" letter-spacing="1.6" font-family="ui-monospace,Menlo,monospace">↻ PLAY  ↺ REW</text>
     </svg>
     <div class="btns">
-      <button id="bRew">⏮ Rewind</button>
-      <button id="bPlay">Play ⏭</button>
+      <button id="bRew">Rewind</button>
+      <button id="bPlay">Play</button>
       <button id="bXray">X-ray</button>
       <button id="bExplode">Exploded</button>
     </div>
   </div>
 
-  <h1>Year Cassette</h1>
-  <p class="lead">A whole year, one photo a day, printed on a single roll of cheap receipt paper. Crank it to replay the year.</p>
-  <p>Thermal paper costs next to nothing, so a year of memories could be one long print. But as a wall collage it's three metres wide, and as framed months it's 12 frames a year. So instead, each year becomes one roll in one small box.</p>
-  <p>It's fully mechanical, with no electronics and no screws. One crank: clockwise plays, anticlockwise rewinds. A swing-idler gear picks which spool to drive, the way a cassette deck does.</p>
+  <div class="eyebrow mono"><span class="dot"></span>YC-01 · Year Cassette</div>
+  <h1>One year.<br>One roll.</h1>
+  <p class="lead">A photo a day, printed on cheap receipt paper and wound into a small box. Crank it to replay the year.</p>
+  <p>As a wall collage, a year is three metres wide. As framed months, it's twelve frames. So instead, each year is one roll in one box.</p>
+  <p>Fully mechanical: no battery, no screws. Turn the crank clockwise to play and anticlockwise to rewind; a swing-idler gear picks the spool, like a cassette deck.</p>
 
   <div class="facts">
-    <span>23 × 8.5 × 9 cm</span><span>13 prints, no supports</span><span>~250 g PLA</span><span>Bambu A1 / P1S</span><span>58 mm thermal paper</span>
+    <div><span class="mono">Size</span>234 × 84 × 85 mm</div>
+    <div><span class="mono">Paper</span>58 mm thermal roll</div>
+    <div><span class="mono">Parts</span>13 prints, no supports</div>
+    <div><span class="mono">Material</span>~250 g PLA, two colours</div>
   </div>
   <div class="dl">
-    <a class="btn" href="cad/year-cassette-stl.zip" download>⬇ STL files</a>
-    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette">GitHub: CAD, build guide, CLAUDE.md</a>
+    <a class="btn" href="cad/year-cassette-stl.zip" download>Download STL files</a>
+    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette">GitHub</a>
   </div>
+  <footer class="mono">Open hardware · CAD, build guide and CLAUDE.md on GitHub</footer>
 </main>
 
 <script type="module">
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 const DEG = Math.PI / 180;
 
 // ======================= real dimensions (mm), straight from cad/year_cassette.py =======================
@@ -103,7 +119,7 @@ const day = (m, d) => new Date(YEAR, m, d);
 const CELLS = [ { t:"lead" }, { t:"day", d:day(0,1), s:0 }, { t:"day", d:day(0,2), s:1 }, { t:"day", d:day(0,3), s:2 }, { t:"gap" },
                 { t:"day", d:day(11,29), s:3 }, { t:"day", d:day(11,30), s:4 }, { t:"day", d:day(11,31), s:5 }, { t:"end" } ];
 const DAY_AT = [0, 0, 1, 2, 182, 362, 363, 364, 364];
-const INK = "#26221f", PAPER = "#efeade";
+const INK = "#26221f", PAPER = "#f1ede2";
 
 // simple SVG scenes, drawn in "thermal" style: black ink, dotted greys
 const DOTS = `<defs>
@@ -112,19 +128,16 @@ const DOTS = `<defs>
   <pattern id="d3" width="2" height="2" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".95" fill="${INK}"/></pattern>
 </defs>`;
 const SCENES = [
-  // mountains + sun
   `<rect width="100" height="78" fill="url(#d1)"/><circle cx="72" cy="22" r="10" fill="${PAPER}"/>
    <polygon points="0,78 0,52 22,26 38,46 55,20 78,50 92,36 100,44 100,78" fill="${INK}"/>
    <polygon points="22,26 17,32 23,30 27,33" fill="${PAPER}"/><polygon points="55,20 49,28 56,25 61,29" fill="${PAPER}"/>
    <polygon points="0,78 0,64 30,56 60,66 100,58 100,78" fill="url(#d3)"/>`,
-  // sea + sailboat
   `<rect width="100" height="44" fill="${PAPER}"/><circle cx="30" cy="30" r="12" fill="url(#d2)"/>
    <rect y="44" width="100" height="34" fill="url(#d2)"/>
    <path d="M0 52 Q12 48 25 52 T50 52 T75 52 T100 52" stroke="${PAPER}" stroke-width="1.6" fill="none"/>
    <path d="M0 62 Q12 58 25 62 T50 62 T75 62 T100 62" stroke="${PAPER}" stroke-width="1.6" fill="none"/>
    <polygon points="62,44 62,14 80,42" fill="${INK}"/><polygon points="60,44 60,20 48,42" fill="url(#d3)"/>
    <path d="M46 45 L84 45 L78 52 L52 52 Z" fill="${INK}"/>`,
-  // city at night
   `<rect width="100" height="78" fill="url(#d3)"/><circle cx="80" cy="16" r="7" fill="${PAPER}"/><circle cx="83" cy="14" r="6" fill="url(#d3)"/>
    <g fill="${INK}"><rect x="2" y="40" width="14" height="38"/><rect x="18" y="26" width="12" height="52"/><rect x="32" y="46" width="16" height="32"/>
    <rect x="50" y="32" width="11" height="46"/><rect x="63" y="50" width="16" height="28"/><rect x="81" y="38" width="17" height="40"/></g>
@@ -132,19 +145,16 @@ const SCENES = [
    <rect x="25" y="40" width="3" height="3"/><rect x="21" y="49" width="3" height="3"/><rect x="36" y="52" width="3" height="3"/>
    <rect x="53" y="38" width="3" height="3"/><rect x="56" y="48" width="3" height="3"/><rect x="67" y="56" width="3" height="3"/>
    <rect x="85" y="44" width="3" height="3"/><rect x="91" y="54" width="3" height="3"/><rect x="85" y="62" width="3" height="3"/></g>`,
-  // lone tree on a hill
   `<rect width="100" height="78" fill="${PAPER}"/><circle cx="20" cy="18" r="8" fill="url(#d1)"/>
    <path d="M0 78 L0 60 Q50 38 100 58 L100 78 Z" fill="url(#d2)"/>
    <rect x="55" y="30" width="5" height="22" fill="${INK}"/>
    <circle cx="57" cy="26" r="13" fill="${INK}"/><circle cx="48" cy="31" r="8" fill="${INK}"/><circle cx="67" cy="31" r="8" fill="${INK}"/>
    <path d="M76 14 l4 2 l4 -2 M84 20 l3 1.5 l3 -1.5" stroke="${INK}" stroke-width="1.2" fill="none"/>`,
-  // road to the horizon
   `<rect width="100" height="40" fill="${PAPER}"/><circle cx="50" cy="36" r="9" fill="url(#d1)"/>
    <rect y="40" width="100" height="38" fill="url(#d1)"/>
    <polygon points="47,40 53,40 82,78 18,78" fill="${INK}"/>
    <g fill="${PAPER}"><polygon points="49.6,44 50.4,44 50.8,49 49.2,49"/><polygon points="49.2,54 50.8,54 51.5,62 48.5,62"/><polygon points="48.6,68 51.4,68 52.4,78 47.6,78"/></g>
    <rect x="10" y="30" width="2" height="12" fill="${INK}"/><rect x="88" y="30" width="2" height="12" fill="${INK}"/>`,
-  // moon and stars
   `<rect width="100" height="78" fill="${INK}"/><circle cx="58" cy="34" r="20" fill="${PAPER}"/>
    <circle cx="52" cy="28" r="4" fill="url(#d2)"/><circle cx="64" cy="40" r="6" fill="url(#d2)"/><circle cx="62" cy="24" r="2.5" fill="url(#d2)"/>
    <g fill="${PAPER}"><circle cx="12" cy="12" r="1"/><circle cx="24" cy="30" r=".8"/><circle cx="16" cy="56" r="1.1"/><circle cx="88" cy="10" r=".9"/>
@@ -159,16 +169,15 @@ function paintCell(i, img) {
   g.fillStyle = PAPER; g.fillRect(0, 0, CS, CS); g.fillStyle = INK; g.textAlign = "center";
   if (c.t === "day") {
     if (img) g.drawImage(img, 8, 8, CS - 16, (CS - 16) * 0.78);
-    g.font = `bold 30px ${MONO}`;
+    g.font = `bold 28px ${MONO}`;
     g.fillText(`${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]}`, CS / 2, CS - 18);
   } else if (c.t === "gap") {
-    g.strokeStyle = INK; g.lineWidth = 4; g.setLineDash([12, 10]); g.strokeRect(10, 10, CS - 20, CS - 20); g.setLineDash([]);
-    g.font = `bold 34px ${MONO}`; g.fillText("· · ·", CS / 2, 96); g.fillText("and so on", CS / 2, 142);
-    g.font = `26px ${MONO}`; g.fillText("359 more days", CS / 2, 186);
+    g.strokeStyle = INK; g.lineWidth = 3; g.setLineDash([10, 10]); g.strokeRect(12, 12, CS - 24, CS - 24); g.setLineDash([]);
+    g.font = `bold 32px ${MONO}`; g.fillText("· · ·", CS / 2, 100); g.font = `24px ${MONO}`; g.fillText("359 more days", CS / 2, 150);
   } else if (c.t === "lead") {
-    g.font = `bold 62px ${MONO}`; g.fillText(String(YEAR), CS / 2, 130); g.font = `bold 28px ${MONO}`; g.fillText("start →", CS / 2, 182);
+    g.font = `bold 58px ${MONO}`; g.fillText(String(YEAR), CS / 2, 130); g.font = `24px ${MONO}`; g.fillText("start →", CS / 2, 176);
   } else {
-    g.font = `bold 62px ${MONO}`; g.fillText("END", CS / 2, 128); g.font = `bold 28px ${MONO}`; g.fillText("rewind ↺", CS / 2, 178);
+    g.font = `bold 58px ${MONO}`; g.fillText("END", CS / 2, 128); g.font = `24px ${MONO}`; g.fillText("rewind ↺", CS / 2, 174);
   }
   paperDirty = true;
 }
@@ -180,25 +189,34 @@ CELLS.forEach((c, i) => {
   img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 78" width="400" height="312">${DOTS}${SCENES[c.s]}</svg>`);
 });
 
-// ======================= scene =======================
+// ======================= renderer, studio light, soft shadow =======================
 const stage = document.getElementById("stage");
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 stage.prepend(renderer.domElement);
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(30, 1, 1, 6000);
-camera.position.set(70, 120, 330);
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const camera = new THREE.PerspectiveCamera(28, 1, 1, 6000);
+camera.position.set(80, 115, 330);
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 4, 0); controls.enableDamping = true; controls.minDistance = 120;
-scene.add(new THREE.HemisphereLight(0xffffff, 0x2a3540, 1.15));
-const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(160, 300, 280); scene.add(key);
-const rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-220, 120, -200); scene.add(rim);
+controls.target.set(0, 2, 0); controls.enableDamping = true; controls.minDistance = 120; controls.maxPolarAngle = 88 * DEG;
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(40, 320, 170); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 6; key.shadow.bias = -0.0004;
+Object.assign(key.shadow.camera, { left: -200, right: 200, top: 200, bottom: -200, near: 50, far: 700 });
+scene.add(key, new THREE.HemisphereLight(0xffffff, 0xd8d4cc, 0.35));
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), new THREE.ShadowMaterial({ opacity: 0.16 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = Y(0) - 0.05; ground.receiveShadow = true; scene.add(ground);
 
-const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0, ...o });
-const BODY = mat(0x2f3e46, { transparent: true }), LID = mat(0x2f3e46, { transparent: true });
-const ORANGE = mat(0xe2b04a), BLUE = mat(0x7fb6c9), CREAM = mat(0xd8d2c4), DARK = mat(0x3a4a52);
+// materials: warm light-grey body, graphite details, one orange accent
+const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.62, metalness: 0, envMapIntensity: 0.55, ...o });
+const BODY = mat(0xdcd9d2, { transparent: true }), LID = mat(0xe8e6e0, { transparent: true });
+const GRAPHITE = mat(0x2b2b29, { roughness: 0.5 }), ORANGE = mat(0xff5b1a, { roughness: 0.45 });
+const SPOOLM = mat(0xf3f1ec), GEARM = mat(0xb8b4ac), IDLER = mat(0xff5b1a, { roughness: 0.5 });
+const rbox = (w, h, d, r, m, x, y, z) => { const o = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, r), m); o.position.set(x, y, z); return o; };
 const box = (w, h, d, m, x, y, z) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); return o; };
-const cyl = (r, h, m, x, y, z, s = 36) => { const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, s), m); o.position.set(x, y, z); return o; };
+const cyl = (r, h, m, x, y, z, s = 40) => { const o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, s), m); o.position.set(x, y, z); return o; };
 function gearGeo(teeth, thick, hole) {
   const r = M * teeth / 2, ra = r + M, rf = r - 1.25 * M, step = 2 * Math.PI / teeth, sh = new THREE.Shape();
   for (let i = 0; i < teeth; i++) {
@@ -213,54 +231,73 @@ function gearGeo(teeth, thick, hole) {
   g.rotateX(-Math.PI / 2); g.translate(0, -thick / 2, 0); return g;
 }
 
-// tray: floor, back, sides, front wall with a one-day window that is open to the top (the lid closes it)
+// tray: soft-edged walls, a one-day window open to the top (the lid closes it), graphite bezel
 const tray = new THREE.Group(); scene.add(tray);
-const WH = WALL_TOP, FZ = BD / 2 - WALL / 2;
-tray.add(box(BW, FLOOR_T, BD, BODY, 0, Y(FLOOR_T / 2), 0));
-tray.add(box(BW, WH, WALL, BODY, 0, Y(WH / 2), -FZ));
-tray.add(box(WALL, WH, BD, BODY, -BW / 2 + WALL / 2, Y(WH / 2), 0));
-tray.add(box(WALL, WH, BD, BODY, BW / 2 - WALL / 2, Y(WH / 2), 0));
-const sideW = (BW - WIN_W) / 2;
-tray.add(box(sideW, WH, WALL, BODY, -(WIN_W + sideW) / 2, Y(WH / 2), FZ));
-tray.add(box(sideW, WH, WALL, BODY, (WIN_W + sideW) / 2, Y(WH / 2), FZ));
-tray.add(box(WIN_W, WIN_Z0, WALL, BODY, 0, Y(WIN_Z0 / 2), FZ));
-[[-SPX, 0], [SPX, 0], [0, SUN_Z]].forEach(([x, z]) => tray.add(cyl(5, 0.8, DARK, x, Y(FLOOR_T + 0.4), z, 20)));
+const WH = WALL_TOP, FZ = BD / 2 - WALL / 2, R = 1.1;
+tray.add(rbox(BW, FLOOR_T, BD, R, BODY, 0, Y(FLOOR_T / 2), 0));
+tray.add(rbox(BW, WH, WALL, R, BODY, 0, Y(WH / 2), -FZ));
+tray.add(rbox(WALL, WH, BD, R, BODY, -BW / 2 + WALL / 2, Y(WH / 2), 0));
+tray.add(rbox(WALL, WH, BD, R, BODY, BW / 2 - WALL / 2, Y(WH / 2), 0));
+{ // front wall as one piece with the window notch, softly bevelled
+  const sh = new THREE.Shape(), hw = BW / 2, ww = WIN_W / 2, bv = 0.6;
+  sh.moveTo(-hw + R, 0); sh.lineTo(hw - R, 0); sh.lineTo(hw, R); sh.lineTo(hw, WH); sh.lineTo(ww, WH); sh.lineTo(ww, WIN_Z0);
+  sh.lineTo(-ww, WIN_Z0); sh.lineTo(-ww, WH); sh.lineTo(-hw, WH); sh.lineTo(-hw, R); sh.closePath();
+  const g = new THREE.ExtrudeGeometry(sh, { depth: WALL - 2 * bv, bevelEnabled: true, bevelSize: bv, bevelThickness: bv, bevelSegments: 2, curveSegments: 4 });
+  const front = new THREE.Mesh(g, BODY); front.position.set(0, Y(0), BD / 2 - WALL + bv); tray.add(front);
+}
+const bez = 1.6, winH = WALL_TOP - WIN_Z0, fz = BD / 2 + 0.05;           // thin graphite frame around the window
+tray.add(box(WIN_W + 2 * bez, bez, 0.4, GRAPHITE, 0, Y(WIN_Z0 - bez / 2), fz));
+tray.add(box(bez, winH + bez, 0.4, GRAPHITE, -(WIN_W + bez) / 2, Y(WIN_Z0 + winH / 2 - bez / 2), fz));
+tray.add(box(bez, winH + bez, 0.4, GRAPHITE, (WIN_W + bez) / 2, Y(WIN_Z0 + winH / 2 - bez / 2), fz));
+[[-SPX, 0], [SPX, 0], [0, SUN_Z]].forEach(([x, z]) => tray.add(cyl(5, 0.8, GRAPHITE, x, Y(FLOOR_T + 0.4), z, 24)));
 const deck = new THREE.Group(); scene.add(deck);
-deck.add(box(BW - 2 * WALL - 0.6, DECK_T, BD - 2 * WALL - 0.6, BODY, 0, Y(DECK_Z0 + DECK_T / 2), 0));
-[-1, 1].forEach(s => deck.add(cyl(POST_D / 2, POST_TOP - (DECK_Z0 + DECK_T), DARK, s * POST_X, Y((DECK_Z0 + DECK_T + POST_TOP) / 2), POST_Z, 20)));
+deck.add(rbox(BW - 2 * WALL - 0.6, DECK_T, BD - 2 * WALL - 0.6, 1, BODY, 0, Y(DECK_Z0 + DECK_T / 2), 0));
+[-1, 1].forEach(s => deck.add(cyl(POST_D / 2, POST_TOP - (DECK_Z0 + DECK_T), GRAPHITE, s * POST_X, Y((DECK_Z0 + DECK_T + POST_TOP) / 2), POST_Z, 24)));
+
+// lid with the debossed label and an orange dot
 const lid = new THREE.Group(); scene.add(lid);
-lid.add(box(BW, LID_T, BD, LID, 0, Y(WALL_TOP + LID_T / 2), 0));
+lid.add(rbox(BW, LID_T, BD, 1.3, LID, 0, Y(WALL_TOP + LID_T / 2), 0));
+{
+  const c = document.createElement("canvas"); c.width = 1024; c.height = 128; const g = c.getContext("2d");
+  g.fillStyle = "#ff5b1a"; g.beginPath(); g.arc(40, 64, 16, 0, 7); g.fill();
+  g.fillStyle = "rgba(40,38,34,.55)"; g.font = `600 52px ${MONO}`; g.textBaseline = "middle"; g.fillText("YEAR CASSETTE", 84, 66);
+  g.font = `400 40px ${MONO}`; g.fillStyle = "rgba(40,38,34,.35)"; g.textAlign = "right"; g.fillText("365 · YC-01", 1010, 66);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  const label = new THREE.Mesh(new THREE.PlaneGeometry(200, 25), new THREE.MeshBasicMaterial({ map: t, transparent: true }));
+  label.rotation.x = -Math.PI / 2; label.position.set(0, Y(WALL_TOP + LID_T) + 0.06, 28); lid.add(label);
+}
 
 // spools: drive gear + hex shaft, removable spool with flanges, and the paper roll on it
 const stripe = document.createElement("canvas"); stripe.width = 256; stripe.height = 8;
-{ const g = stripe.getContext("2d"); g.fillStyle = PAPER; g.fillRect(0, 0, 256, 8); g.fillStyle = "rgba(60,50,40,.2)"; for (let x = 0; x < 256; x += 32) g.fillRect(x, 0, 3, 8); }
+{ const g = stripe.getContext("2d"); g.fillStyle = PAPER; g.fillRect(0, 0, 256, 8); g.fillStyle = "rgba(60,50,40,.14)"; for (let x = 0; x < 256; x += 32) g.fillRect(x, 0, 2, 8); }
 const stripeTex = new THREE.CanvasTexture(stripe); stripeTex.colorSpace = THREE.SRGBColorSpace; stripeTex.wrapS = THREE.RepeatWrapping;
 function makeSpool(x) {
   const g = new THREE.Group(); g.position.x = x; scene.add(g);
-  const gear = new THREE.Mesh(gearGeo(Z_SPL, GEAR_T, 3.2), ORANGE); gear.position.y = Y(GEAR_Z0 + GEAR_T / 2); g.add(gear);
-  g.add(cyl(6.35, HEX_TOP - GEAR_Z1, ORANGE, 0, Y((GEAR_Z1 + HEX_TOP) / 2), 0, 6));
-  g.add(cyl(FLANGE_D / 2, FLANGE_T, ORANGE, 0, Y(SPOOL_Z0 + FLANGE_T / 2), 0));
-  g.add(cyl(CORE_D / 2, CORE_Z1 - SPOOL_Z0, ORANGE, 0, Y((SPOOL_Z0 + CORE_Z1) / 2), 0));
-  g.add(cyl(FLANGE_D / 2, FLANGE_T, ORANGE, 0, Y(CORE_Z1 + FLANGE_T / 2), 0));
+  const gear = new THREE.Mesh(gearGeo(Z_SPL, GEAR_T, 3.2), GEARM); gear.position.y = Y(GEAR_Z0 + GEAR_T / 2); g.add(gear);
+  g.add(cyl(6.35, HEX_TOP - GEAR_Z1, GEARM, 0, Y((GEAR_Z1 + HEX_TOP) / 2), 0, 6));
+  g.add(cyl(FLANGE_D / 2, FLANGE_T, SPOOLM, 0, Y(SPOOL_Z0 + FLANGE_T / 2), 0, 64));
+  g.add(cyl(CORE_D / 2, CORE_Z1 - SPOOL_Z0, SPOOLM, 0, Y((SPOOL_Z0 + CORE_Z1) / 2), 0));
+  g.add(cyl(FLANGE_D / 2, FLANGE_T, ORANGE, 0, Y(CORE_Z1 + FLANGE_T / 2), 0, 64));           // the caps: printed in the accent colour
   const roll = new THREE.Group(); roll.position.y = Y(PAPER_MID); g.add(roll);
-  const side = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, PAPER_W, 48, 1, true), new THREE.MeshStandardMaterial({ map: stripeTex, roughness: .9 }));
-  const cap = new THREE.Mesh(new THREE.RingGeometry(.36, 1, 48), new THREE.MeshStandardMaterial({ color: 0xe9e2d2, roughness: .9, side: THREE.DoubleSide }));
+  const side = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, PAPER_W, 64, 1, true), mat(0xffffff, { map: stripeTex, roughness: .9 }));
+  const cap = new THREE.Mesh(new THREE.RingGeometry(.36, 1, 64), mat(0xebe6da, { roughness: .9, side: THREE.DoubleSide }));
   cap.rotation.x = -Math.PI / 2; cap.position.y = PAPER_W / 2 + .05; roll.add(side, cap);
   return { g, roll };
 }
 const spoolL = makeSpool(-SPX), spoolR = makeSpool(SPX);
 
-// sun gear + shaft + crank
+// sun gear + shaft + crank (graphite arm, orange knob)
 const sunGroup = new THREE.Group(); sunGroup.position.z = SUN_Z; scene.add(sunGroup);
-const sunGear = new THREE.Mesh(gearGeo(Z_SUN, GEAR_T, 0), ORANGE); sunGear.position.y = Y(GEAR_Z0 + GEAR_T / 2); sunGroup.add(sunGear);
-sunGroup.add(cyl(SHAFT_D / 2, SHAFT_TOP - GEAR_Z1, ORANGE, 0, Y((GEAR_Z1 + SHAFT_TOP) / 2), 0, 24));
+const sunGear = new THREE.Mesh(gearGeo(Z_SUN, GEAR_T, 0), GRAPHITE); sunGear.position.y = Y(GEAR_Z0 + GEAR_T / 2); sunGroup.add(sunGear);
+sunGroup.add(cyl(SHAFT_D / 2, SHAFT_TOP - GEAR_Z1, GRAPHITE, 0, Y((GEAR_Z1 + SHAFT_TOP) / 2), 0, 32));
 const crank = new THREE.Group(); crank.position.y = Y(WALL_TOP + LID_T + 0.5); sunGroup.add(crank);
-crank.add(cyl(9, 10, CREAM, 0, 5, 0)); crank.add(box(CRANK_ARM, 5, 9, CREAM, CRANK_ARM / 2, 2.5, 0)); crank.add(cyl(4.5, 22, ORANGE, CRANK_ARM, 11, 0, 20));
+crank.add(cyl(9, 10, GRAPHITE, 0, 5, 0, 48)); crank.add(rbox(CRANK_ARM, 5, 9, 2, GRAPHITE, CRANK_ARM / 2, 2.5, 0));
+crank.add(cyl(4.5, 21, ORANGE, CRANK_ARM, 10.5, 0, 32)); crank.add(cyl(3.6, 1, ORANGE, CRANK_ARM, 21.5, 0, 32));
 
-// swing arm + idler
+// swing arm + idler (orange: the clever bit)
 const armGroup = new THREE.Group(); armGroup.position.set(0, Y(ARM_Z0 + 1), SUN_Z); scene.add(armGroup);
-armGroup.add(box(ARM + 8, 2, 7, BLUE, ARM / 2, 0, 0)); armGroup.add(cyl(8, 2, BLUE, 0, 0, 0, 24));
-const idler = new THREE.Mesh(gearGeo(Z_IDL, GEAR_T, 2.5), BLUE); idler.position.set(ARM, Y(GEAR_Z0 + GEAR_T / 2) - Y(ARM_Z0 + 1), 0); armGroup.add(idler);
+armGroup.add(rbox(ARM + 8, 2, 7, 0.8, IDLER, ARM / 2, 0, 0)); armGroup.add(cyl(8, 2, IDLER, 0, 0, 0, 32));
+const idler = new THREE.Mesh(gearGeo(Z_IDL, GEAR_T, 2.5), IDLER); idler.position.set(ARM, Y(GEAR_Z0 + GEAR_T / 2) - Y(ARM_Z0 + 1), 0); armGroup.add(idler);
 const ENG = (() => {
   const E = R_SPL + R_IDL, dx = SPX, dz = -SUN_Z, d = Math.hypot(dx, dz);
   const a = (ARM * ARM - E * E + d * d) / (2 * d), h = Math.sqrt(ARM * ARM - a * a), ux = dx / d, uz = dz / d;
@@ -274,15 +311,16 @@ const PW = 2 * POST_X, PXMM = 5, PAPER_Z = POST_Z + POST_D / 2 + 0.3;
 const paperCanvas = document.createElement("canvas"); paperCanvas.width = PW * PXMM; paperCanvas.height = PAPER_W * PXMM;
 const pctx = paperCanvas.getContext("2d");
 const paperTex = new THREE.CanvasTexture(paperCanvas); paperTex.colorSpace = THREE.SRGBColorSpace; paperTex.anisotropy = 8;
-const span = new THREE.Mesh(new THREE.PlaneGeometry(PW, PAPER_W), new THREE.MeshStandardMaterial({ map: paperTex, roughness: .85 }));
+const span = new THREE.Mesh(new THREE.PlaneGeometry(PW, PAPER_W), mat(0xffffff, { map: paperTex, roughness: .85, envMapIntensity: .3 }));
 span.position.set(0, Y(PAPER_MID), PAPER_Z); scene.add(span);
-const legMat = new THREE.MeshStandardMaterial({ color: 0xe6dfd0, roughness: .9, side: THREE.DoubleSide });
+const legMat = mat(0xece7db, { roughness: .9, side: THREE.DoubleSide });
 const legL = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_W), legMat), legR = new THREE.Mesh(new THREE.PlaneGeometry(1, PAPER_W), legMat);
 legL.position.y = legR.position.y = Y(PAPER_MID); scene.add(legL, legR);
 function placeLeg(leg, s, r) {
   const ax = s * SPX, az = r, bx = s * POST_X, bz = PAPER_Z, dx = bx - ax, dz = bz - az;
   leg.scale.x = Math.max(Math.hypot(dx, dz), .1); leg.position.x = (ax + bx) / 2; leg.position.z = (az + bz) / 2; leg.rotation.y = -Math.atan2(dz, dx);
 }
+scene.traverse(o => { if (o.isMesh && o !== ground) { o.castShadow = true; o.receiveShadow = true; } });
 
 // ======================= mechanism =======================
 const PAPER_T = .06, LEAD = 70, TOTAL = LEAD * 2 + 365 * CELL_MM;
@@ -317,8 +355,8 @@ function update() {
   placeLeg(legL, -1, rL); placeLeg(legR, 1, rR);
   if (paperDirty) drawPaper();
   const c = CELLS[Math.round(pos / CELL_MM)];
-  hudDay.textContent = c.t === "day" ? `${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]} ${YEAR}` : c.t === "gap" ? "· · · and so on" : c.t.toUpperCase();
-  hudGear.textContent = Math.abs(arm - A_LEFT) < 1e-6 ? "▶ playing" : Math.abs(arm - A_RIGHT) < 1e-6 ? "◀ rewinding" : (crankAng === 0 ? "turn the crank ↻" : "idler swinging…");
+  hudDay.textContent = c.t === "day" ? `${DOW[c.d.getDay()]} ${String(c.d.getDate()).padStart(2, "0")} ${MON[c.d.getMonth()]} ${YEAR}` : c.t === "gap" ? "· · ·" : c.t === "lead" ? String(YEAR) : "END";
+  hudGear.textContent = Math.abs(arm - A_LEFT) < 1e-6 ? "Play" : Math.abs(arm - A_RIGHT) < 1e-6 ? "Rewind" : (crankAng === 0 ? "Turn the crank" : "Switching");
   dialArm.setAttribute("transform", `rotate(${crankAng / DEG} 75 75)`);
 }
 
@@ -326,7 +364,7 @@ function update() {
 let xray = false, exploded = location.hash === "#explode", exAmt = 0, auto = location.hash === "#play" ? 1 : 0;
 if (exploded) document.getElementById("bExplode").classList.add("on");
 function applyViews() {
-  const op = xray ? 0.2 : 1;
+  const op = xray ? 0.18 : 1;
   [BODY, LID].forEach(m => { m.opacity = op; m.depthWrite = op >= 1; });
   lid.position.y = exAmt * 90; deck.position.y = exAmt * 22;
   spoolL.g.position.y = spoolR.g.position.y = exAmt * 45;
@@ -347,7 +385,7 @@ function resize() {
   const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false);
   camera.aspect = w / h; camera.updateProjectionMatrix();
   const vf = THREE.MathUtils.degToRad(camera.fov) / 2, hf = Math.atan(Math.tan(vf) * camera.aspect);
-  const dist = Math.max(142 / Math.tan(hf), 88 / Math.tan(vf));       // frame the whole 234 mm box
+  const dist = Math.max(142 / Math.tan(hf), 88 / Math.tan(vf));
   const dir = camera.position.clone().sub(controls.target).normalize();
   camera.position.copy(controls.target).addScaledVector(dir, dist); controls.maxDistance = dist * 2.2;
 }

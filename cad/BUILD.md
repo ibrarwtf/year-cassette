@@ -35,6 +35,13 @@ All files are already in print orientation, and **none of them need supports**.
 - **Gears:** use 0.16 mm layers if you want smoother meshing (optional).
 - **Deck and lid:** a brim helps if your room is cold and the long corners lift.
 
+**Colours (the look on the page):**
+- **Box parts** in a warm light grey or off-white matte PLA: tray, deck, lid, spools.
+- **Accent parts** in orange: spool caps, swing arm and idler.
+- **Small parts** in black: sun gear shaft and crank.
+- With an AMS, colour the crank's knob orange in Bambu Studio and leave the arm black.
+- The lid has a debossed "YEAR CASSETTE" label and a small dot recess beside it. Fill the dot with a drop of orange paint, or leave it plain.
+
 ## How it works
 
 1. The **crank** turns the **sun gear** (centre of the box, 20 mm behind the paper).

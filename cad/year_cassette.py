@@ -80,6 +80,14 @@ brake_tongue_t = 1.2
 # Window (open at the top: the lid closes it, so no long bridge to print)
 win_w = 54.0            # shows one 48 mm day at a time
 
+# Finish (small touches: chamfered lid edge, debossed label, dot recess, chamfered crank knob)
+label_text = "YEAR CASSETTE"
+label_size = 4.5
+label_depth = 0.4
+label_x, label_y = -96.0, 30.0   # label starts near the front-left corner of the lid (text runs toward +x)
+dot_d = 3.0
+label_chamfer = 0.8
+
 # Crank
 crank_arm = 40.0
 crank_hub_d = 18.0
@@ -186,7 +194,11 @@ def make_deck():
     return d
 
 def make_lid():
-    p = rbox(box_l, box_w, lid_t, corner_r, wall_top)
+    p = rbox(box_l, box_w, lid_t, corner_r, wall_top).faces(">Z").edges().chamfer(label_chamfer)
+    # debossed label + a dot recess (fill it with paint or a dab of orange), reading from the front
+    label = (cq.Workplane("XY").text(label_text, label_size, label_depth + 0.01, kind="bold", halign="left", valign="center")
+             .rotate((0, 0, 0), (0, 0, 1), 180).translate((-label_x, label_y, wall_top + lid_t - label_depth)))
+    p = p.cut(label).cut(cyl(dot_d, label_depth + 0.01, -label_x + 6, label_y, wall_top + lid_t - label_depth))
     lip_o = rbox(inner_l - 0.4, inner_w - 0.4, lid_lip_depth, corner_r - wall, wall_top - lid_lip_depth)
     lip_i = rbox(inner_l - 0.4 - 2 * lid_lip_t, inner_w - 0.4 - 2 * lid_lip_t, lid_lip_depth, 0.8, wall_top - lid_lip_depth)
     p = p.union(lip_o.cut(lip_i))
@@ -240,7 +252,7 @@ def make_idler(angle_deg=90.0):
 def make_crank():
     hub_z0 = wall_top + lid_t + 0.5
     c = cq.Workplane("XY").workplane(offset=hub_z0).center(crank_arm / 2, 0).rect(crank_arm, 9.0).extrude(crank_bar_t)
-    c = c.union(cyl(crank_hub_d, crank_hub_h, 0, 0, hub_z0)).union(cyl(handle_d, handle_h, crank_arm, 0, hub_z0))
+    c = c.union(cyl(crank_hub_d, crank_hub_h, 0, 0, hub_z0)).union(cyl(handle_d, handle_h, crank_arm, 0, hub_z0).faces(">Z").edges().chamfer(1.0))
     hole = d_shaft(sun_shaft_d + press, crank_hub_h + 2, d_flat - press, hub_z0 - 1)
     return c.cut(hole).translate((0, sun_y, 0))
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Year Cassette · mechanical prototype</title>
+<title>Year Cassette: a year of memories on one hand-cranked roll</title>
 <style>
   :root { --ink:#e8e4da; --mute:#8d949b; --accent:#e2b04a; }
   * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -29,6 +29,16 @@
   p { margin:6px 0; }
   .small { font-size:13px; color:var(--mute); }
   .key { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:middle; }
+  .lead { font-size:16px; color:#cfcabf; margin:4px 0 8px; }
+  ul { margin:0; padding-left:20px; } ul li { margin:5px 0; }
+  .specs { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0 12px; }
+  .spec { background:#1a1d20; border:1px solid #2a2f34; border-radius:10px; padding:8px 10px; }
+  .spec b { display:block; font-size:16px; } .spec span { font-size:12px; color:var(--mute); }
+  .dl { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 10px; }
+  .btn { display:inline-block; text-decoration:none; background:var(--accent); color:#1a1a1a; font-weight:600; border-radius:10px; padding:10px 12px; font-size:14px; }
+  .btn.ghost { background:#23282d; color:var(--ink); border:1px solid #343a40; font-weight:500; }
+  pre { white-space:pre-wrap; background:#0a0b0c; border:1px solid #2c3136; border-radius:10px; padding:10px 12px; font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace; color:#cfe8d2; }
+  code { font:12.5px ui-monospace,Menlo,Consolas,monospace; color:#e2d4b0; }
 </style>
 <script type="importmap">
 { "imports": {
@@ -63,36 +73,51 @@
       <button id="bExplode">Exploded</button>
     </div>
   </div>
-  <p class="small">One crank in the middle. Turn it clockwise to play forward and anticlockwise to rewind. When you change direction, the crank turns about a third of a turn before the paper moves: that's the idler swinging across to the other spool.</p>
 
   <h1>Year Cassette</h1>
-  <p class="small">A fully mechanical box with no electronics that replays a year of daily thermal prints: one 48&nbsp;mm square per day, about 19.6&nbsp;m of paper.</p>
+  <p class="lead">A year of memories on one roll of receipt paper, in a box you crank by hand to replay it. Fully mechanical: no electronics, no screws, no glue.</p>
 
-  <h2>How the drive works</h2>
-  <ol>
-    <li><span class="key" style="background:#e2b04a"></span><b>Crank and sun gear</b> share one shaft in the middle of the box, just behind the paper.</li>
-    <li><span class="key" style="background:#7fb6c9"></span><b>Swing arm and idler gear.</b> The arm pivots on the sun gear's shaft and rubs it lightly, so it swings whichever way the crank turns.</li>
-    <li>Turning <b>clockwise</b> swings the idler into the left spool's gear, which winds paper onto the left spool (play).</li>
-    <li>Turning <b>anticlockwise</b> swings it across into the right spool's gear, which winds paper back onto the right spool (rewind).</li>
-    <li>The spool that isn't being driven is pulled along by the paper against a light printed brake, so the paper stays taut in both directions.</li>
-  </ol>
-  <p class="small">The spools aren't geared directly to each other on purpose. As paper moves across, one roll grows from 15 to 41&nbsp;mm while the other shrinks, so their speeds keep changing (by up to 2.7&times;). A rigid link would tear the paper or let it go slack. Cassette decks solve this the same way.</p>
+  <h2>Why</h2>
+  <p>Thermal receipt paper costs almost nothing, and a cheap receipt printer prints on it without ink. That raised a question: what would you print if paper came by the metre?</p>
+  <p>A year, one small square per day. The first plan was a wall collage, with 52 week-columns, each 7 days tall. Laid out properly it's three metres wide. Next came one framed month at a time, but that's 12 frames a year and 60 after five years. Too much stuff.</p>
+  <p>What we really wanted was <b>one object per year</b>. So the year became one long strip, about 19.6&nbsp;m, the strip became a roll, and the roll went into a cassette. Turn the crank and the days scroll past the window. Turn it back to rewind.</p>
 
-  <h2>Parts: 9 prints, no screws, no electronics</h2>
-  <ol>
-    <li><b>Tray</b>: floor with the three axle pins (two spools and the sun gear).</li>
-    <li><b>Deck plate</b>: drops in above the gears. The two guide posts and two springy brake tabs are printed in.</li>
-    <li><b>Lid</b> with a 124 × 64&nbsp;mm window. It snaps on.</li>
-    <li><b>Spool × 2</b>, each with a 35-tooth gear printed at the bottom and a slot in the core for the paper end.</li>
-    <li><b>Sun gear</b> (15 teeth) with a tall D-shaft up through the lid.</li>
-    <li><b>Swing arm</b> with a built-in flex spring that presses it against the sun gear (that's the friction).</li>
-    <li><b>Idler gear</b> (20 teeth) on the end of the arm.</li>
-    <li><b>Crank handle</b>, press-fitted onto the D-shaft above the lid.</li>
-  </ol>
-  <p class="small">Gears are module 2 (large, chunky teeth that print reliably). One crank turn moves the paper 20 to 55&nbsp;mm, depending on how full the take-up roll is: roughly one to two turns per day. The box is about 22 × 9 × 8&nbsp;cm, and every part fits a Bambu A1 or P1S bed.</p>
+  <h2>How it works</h2>
+  <ul>
+    <li><b>One crank in the middle</b> turns a small sun gear.</li>
+    <li>A <b>swing arm</b> carrying an idler gear follows the crank's direction. <b>Clockwise</b> it meshes with the left spool (play); <b>anticlockwise</b> it swings across to the right spool (rewind). It's the same trick cassette decks use.</li>
+    <li>The spool that isn't driven is pulled along by the paper against a light printed brake, so the paper stays taut both ways and can't jam.</li>
+    <li>The spools are never geared to each other: one roll grows while the other shrinks, so their speeds keep changing.</li>
+  </ul>
 
-  <h2>Printing the paper</h2>
-  <p class="small">The paper path only touches the back of the paper (guide posts) and its edges (spool flanges). The printed side never rubs, because thermal paper darkens with friction. Use long-life thermal paper for a roll you want to keep for years.</p>
+  <h2>Build one</h2>
+  <div class="specs">
+    <div class="spec"><b>23 × 8.5 × 9 cm</b><span>box (crank adds 2 cm)</span></div>
+    <div class="spec"><b>13 prints</b><span>10 files, no supports</span></div>
+    <div class="spec"><b>≈ 250 g PLA</b><span>fits a Bambu A1 / P1S bed</span></div>
+    <div class="spec"><b>58 mm paper</b><span>48 mm square per day</span></div>
+  </div>
+  <div class="dl">
+    <a class="btn" href="cad/year-cassette-stl.zip" download>⬇ All STL files (.zip)</a>
+    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette/blob/main/cad/BUILD.md">Build guide</a>
+    <a class="btn ghost" href="cad/step/year_cassette_assembly.step" download>Assembly (.step)</a>
+    <a class="btn ghost" href="https://github.com/ibrarwtf/year-cassette">Source on GitHub</a>
+  </div>
+  <p class="small"><b>Print:</b> PLA, 0.2&nbsp;mm layers, 3 walls, 15% infill, no supports. Use 4 walls and a brim for the sun gear shaft. Three plates: (1) tray, (2) deck + lid, (3) everything else. Print <code>spool_drive</code>, <code>spool</code> and <code>spool_cap</code> twice each.</p>
+  <p class="small"><b>Assemble:</b> spool drives and sun gear onto the floor pins, idler onto the swing arm, arm onto the sun shaft, then the deck, the paper roll, the spools and caps, the lid, and the crank. The build guide has the step-by-step version, how to make and load the paper roll, and a tuning table.</p>
+  <p class="small"><b>Status:</b> prototype v1. It's modelled and checked (no collisions, every gear pair meshes), but nobody has printed it yet, so expect to tune a fit or two.</p>
+
+  <h2>Hand it to Claude Code</h2>
+  <p class="small">Paste this into Claude Code. The repo includes a CLAUDE.md, the parametric CadQuery model and the build guide.</p>
+  <pre id="prompt">Clone https://github.com/ibrarwtf/year-cassette and read CLAUDE.md and cad/BUILD.md.
+I have a Bambu Lab printer. Help me print and assemble the Year Cassette:
+check every part fits my bed, tell me how to lay out the plates in Bambu Studio,
+then walk me through assembly. If a fit is off after printing, change the
+parameters in cad/year_cassette.py, regenerate the STLs and re-run its checks.</pre>
+  <button id="copy">Copy prompt</button>
+
+  <h2>Making the paper</h2>
+  <p class="small">Print one 48&nbsp;mm square per day on 58&nbsp;mm thermal paper, with each picture rotated 90°, because the paper runs sideways through the window. Join the strips with tape on the back. Wind the year onto the right spool, printed side out, with Dec&nbsp;31 at the core. Then lead Jan&nbsp;1 around the front of the guide posts into the left spool. Use long-life thermal paper if you want it to last for years.</p>
 </main>
 
 <script type="module">
@@ -166,9 +191,9 @@ function gearGeo(teeth, module, thick, hole) {
 }
 
 // dimensions
-const BW = 220, BD = 80, WALL = 3, FLOOR_Y = -46, GEAR_Y = -40, DECK_Y = -33, LID_Y = 46;
-const SPX = 85, POST_X = 64, POST_Z = 22, PAPER_Y = 2, PAPER_H = 58, PAPER_Z = POST_Z + 3.3;
-const M = 2, Z_SUN = 15, Z_IDL = 20, Z_SPL = 35, SUN_Z = -20;
+const BW = 234, BD = 84, WALL = 3, FLOOR_Y = -46, GEAR_Y = -40, DECK_Y = -33, LID_Y = 46;
+const SPX = 80, POST_X = 64, POST_Z = 22, PAPER_Y = 2, PAPER_H = 58, PAPER_Z = POST_Z + 3.3;
+const M = 2, Z_SUN = 15, Z_IDL = 20, Z_SPL = 30, SUN_Z = -20;
 const R_SUN = M * Z_SUN / 2, R_IDL = M * Z_IDL / 2, R_SPL = M * Z_SPL / 2, ARM = R_SUN + R_IDL;
 // idler engages a spool gear when its centre is ARM from the sun axis and R_SPL + R_IDL from the spool axis
 const ENG = (() => {
@@ -327,6 +352,7 @@ const up = () => lastA = null; dial.addEventListener("pointerup", up); dial.addE
 document.getElementById("bRew").onclick = () => auto = -1;
 document.getElementById("bPlay").onclick = () => auto = 1;
 document.getElementById("bXray").onclick = e => { xray = !xray; e.target.classList.toggle("on", xray); };
+document.getElementById("copy").onclick = e => { navigator.clipboard.writeText(document.getElementById("prompt").textContent).then(() => { e.target.textContent = "Copied ✓"; setTimeout(() => e.target.textContent = "Copy prompt", 1500); }); };
 document.getElementById("bExplode").onclick = e => { exploded = !exploded; e.target.classList.toggle("on", exploded); };
 
 function resize() {

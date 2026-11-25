@@ -1,7 +1,9 @@
 # Year Cassette
 
-A hand-cranked, fully mechanical box that replays a year of daily thermal-printer prints (one 48 mm square per day, ~19.6 m of paper per year).
+A year of memories on one roll of 58 mm thermal paper, in a fully mechanical box you crank by hand to replay it.
 
-One centre crank drives a swing-idler gear train, like a cassette deck: clockwise winds the left spool (play), anticlockwise winds the right spool (rewind).
-
-- `index.html`: interactive 3D prototype (three.js). Open with `#play` or `#explode` to start in that state.
+- Live page: https://ibrarwtf.github.io/year-cassette/
+- Build guide: [cad/BUILD.md](cad/BUILD.md)
+- Printable parts: [cad/stl/](cad/stl/) (or [the zip](cad/year-cassette-stl.zip)), STEP in [cad/step/](cad/step/)
+- Parametric model: [cad/year_cassette.py](cad/year_cassette.py) (CadQuery)
+- Using Claude Code? Start with [CLAUDE.md](CLAUDE.md).
